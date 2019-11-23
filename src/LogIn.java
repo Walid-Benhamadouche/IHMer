@@ -1,11 +1,12 @@
 import IHM.*;
 import IHM.Button;
 import IHM.Label;
-import IHM.TextField;;
+import IHM.TextField;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class LogIn {
 
@@ -13,13 +14,14 @@ public class LogIn {
     private Form logIn = new Form(720,390,"logI nT");
 
     private Image logInIcon;
-    private Image image;
+    private ImageIcon logo;
     private Color Dracula = new Color(45,52,54);
     private Color Orange = new Color(230,145,56);
 
     private Label SignInText = new Label("Times New Roman", Font.PLAIN, 36, Orange, "Sign In");
     private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Orange, "E-mail");
     private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Orange, "Password");
+    private Label logoL = new Label();
 
     private Separator E_mailS = new Separator(240, Orange);
     private Separator PasswordS = new Separator(240, Orange);
@@ -43,19 +45,18 @@ public class LogIn {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         logIn.setIconImage(logInIcon);
         logIn.setLayout(new BorderLayout());
         //topPanel Configuration
         topPanel.add(SignInText);
 
         //leftPanel Configuration
-        try {
-            image = ImageIO.read(new File("IHMer.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        leftPanel.imageUpdate(image,0,0,0,130,50);
+        //try{
+            logo = new ImageIcon("IHMer.png");
+        // }catch ()
+        logoL.setIcon(logo);
+        leftPanel.add(logoL);
 
         //rightPanel Configuration
         rightPanel.setLayout(new GridBagLayout());
