@@ -15,5 +15,6 @@ public class TextField extends JTextField {
         this.setFont(defaultFont);
         this.setPreferredSize(defaultDim);
         this.setBorder(null);
+
     }
 }

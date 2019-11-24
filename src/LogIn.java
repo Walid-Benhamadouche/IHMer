@@ -3,9 +3,7 @@ import IHM.Button;
 import IHM.Label;
 import IHM.TextField;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -37,7 +35,7 @@ public class LogIn {
 
     private Button Cancel = new Button(80, 30, Orange, Dracula,"Cancel");
     private Button Sign_in = new Button(80, 30, Orange, Dracula,"Sign in");
-    private Button Sign_up = new Button(80,20, Orange, Dracula, "Sign up");
+    private Button Sign_up = new Button(85,18, Orange, Dracula, "Sign up");
 
     private MyPanel topPanel = new MyPanel(720, 80, Dracula);
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
@@ -45,24 +43,6 @@ public class LogIn {
 
     public LogIn()
     {
-        Cancel.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                System.exit(0);
-            }
-
-            /*public void mouseEntered(MouseEvent event)
-            {
-                Cancel.setBackground(Color.gray);
-            }
-            public void mouseExited(MouseEvent event)
-            {
-                Cancel.setBackground(Dracula);
-            }*/
-        });
-
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -75,14 +55,11 @@ public class LogIn {
         topPanel.add(SignInText);
 
         //leftPanel Configuration
-        //try{
-            logo = new ImageIcon("IHMer.png");
-        // }catch ()
+        logo = new ImageIcon("IHMer.png");
         logoL.setIcon(logo);
         leftPanel.setLayout(new GridBagLayout());
         GridBagConstraints lgbc = new GridBagConstraints();
         lgbc.weighty = 0.3;
-
         lgbc.fill = GridBagConstraints.NONE;
         lgbc.gridx = 0;
 
@@ -90,13 +67,14 @@ public class LogIn {
         lgbc.gridy = 0;
         leftPanel.add(logoL, lgbc);
         //eXMember----------------------
+        eXMemberL.setBackground(Color.BLACK);
         lgbc.weighty = 1;
         lgbc.anchor = GridBagConstraints.FIRST_LINE_START;
         lgbc.gridy = 1;
         leftPanel.add(eXMemberL, lgbc);
         //Sign_up-----------------------
         lgbc.gridx = 1;
-        //lgbc.weightx = 0.1;
+        lgbc.anchor = GridBagConstraints.FIRST_LINE_START;
         leftPanel.add(Sign_up, lgbc);
 
         //rightPanel Configuration
@@ -147,12 +125,214 @@ public class LogIn {
         logIn.getContentPane().add(leftPanel, BorderLayout.WEST);
         logIn.getContentPane().add(rightPanel, BorderLayout.CENTER);
 
+        Cancel.addMouseListener(new MouseListener()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                cancelMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                cancelMouseEntered();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                cancelMouseExited();
+            }
+        });
+
+        Sign_in.addMouseListener(new MouseListener()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                signInMouseEntered();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                signInMouseExited();
+            }
+        });
+
+        Sign_up.addMouseListener(new MouseListener()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+
+            }
+        });
+
+        E_mailF.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                e_mailFFocusGained();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                e_mailFFocusLost();
+            }
+        });
+
+        PasswordF.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                PasswordFFocusGained();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                PasswordFFocusLost();
+            }
+        });
+
+        RememberMe.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                rememberMeFocusGained();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                rememberMeFocusLost();
+            }
+        });
+
         //setting Form to visible
         logIn.setResizable(false);
         logIn.setVisible(true);
     }
+    public void cancelMouseClicked()
+    {
+        System.exit(0);
+    }
+    public void cancelMouseEntered()
+    {
+        Cancel.setBackground(Color.GRAY);
+    }
+    public void cancelMouseExited()
+    {
+        Cancel.setBackground(Dracula);
+    }
 
+    public void signInMouseEntered()
+    {
+        Sign_in.setBackground(Color.GRAY);
+    }
 
+    public void signInMouseExited()
+    {
+        Sign_in.setBackground(Dracula);
+    }
+
+    public void e_mailFFocusGained()
+    {
+        E_mailF.setForeground(Orange);
+        E_mailL.setForeground(Orange);
+        E_mailS.setForeground(Orange);
+    }
+
+    public void e_mailFFocusLost()
+    {
+        E_mailF.setForeground(Color.gray);
+        E_mailL.setForeground(Color.gray);
+        E_mailS.setForeground(Color.gray);
+    }
+
+    public void PasswordFFocusGained()
+    {
+        PasswordF.setForeground(Orange);
+        PasswordL.setForeground(Orange);
+        PasswordS.setForeground(Orange);
+    }
+
+    public void PasswordFFocusLost()
+    {
+        PasswordF.setForeground(Color.gray);
+        PasswordL.setForeground(Color.gray);
+        PasswordS.setForeground(Color.gray);
+    }
+
+    public void rememberMeFocusGained()
+    {
+        RememberMe.setForeground(Orange);
+    }
+
+    public void rememberMeFocusLost()
+    {
+        RememberMe.setForeground(Color.gray);
+    }
 
     public static void main(String[] args) {
         LogIn login = new LogIn();
