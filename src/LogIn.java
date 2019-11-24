@@ -3,15 +3,18 @@ import IHM.Button;
 import IHM.Label;
 import IHM.TextField;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
 
 public class LogIn {
 
     //declarations
-    private Form logIn = new Form(720,390,"logI nT");
+    private Form logIn = new Form(720,390,"Log In");
 
     private Image logInIcon;
     private ImageIcon logo;
@@ -19,20 +22,22 @@ public class LogIn {
     private Color Orange = new Color(230,145,56);
 
     private Label SignInText = new Label("Times New Roman", Font.PLAIN, 36, Orange, "Sign In");
-    private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Orange, "E-mail");
-    private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Orange, "Password");
+    private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "E-mail");
+    private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Password");
     private Label logoL = new Label();
+    private Label eXMemberL = new Label("Tahoma",Font.PLAIN, 12, Color.lightGray, "Already a member");
 
-    private Separator E_mailS = new Separator(240, Orange);
-    private Separator PasswordS = new Separator(240, Orange);
+    private Separator E_mailS = new Separator(240, Color.gray);
+    private Separator PasswordS = new Separator(240, Color.gray);
 
-    private TextField E_mailF = new TextField(240, 30, Dracula, Orange);
-    private PasswordField PasswordF = new PasswordField(240, 30, Dracula, Orange);
+    private TextField E_mailF = new TextField(240, 30, Dracula, Color.gray);
+    private PasswordField PasswordF = new PasswordField(240, 30, Dracula, Color.gray);
 
-    private CheckBox RememberMe = new CheckBox(Dracula, Orange, "Remember me");
+    private CheckBox RememberMe = new CheckBox(Dracula, Color.gray, "Remember me");
 
     private Button Cancel = new Button(80, 30, Orange, Dracula,"Cancel");
     private Button Sign_in = new Button(80, 30, Orange, Dracula,"Sign in");
+    private Button Sign_up = new Button(80,20, Orange, Dracula, "Sign up");
 
     private MyPanel topPanel = new MyPanel(720, 80, Dracula);
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
@@ -40,6 +45,24 @@ public class LogIn {
 
     public LogIn()
     {
+        Cancel.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.exit(0);
+            }
+
+            /*public void mouseEntered(MouseEvent event)
+            {
+                Cancel.setBackground(Color.gray);
+            }
+            public void mouseExited(MouseEvent event)
+            {
+                Cancel.setBackground(Dracula);
+            }*/
+        });
+
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -56,7 +79,25 @@ public class LogIn {
             logo = new ImageIcon("IHMer.png");
         // }catch ()
         logoL.setIcon(logo);
-        leftPanel.add(logoL);
+        leftPanel.setLayout(new GridBagLayout());
+        GridBagConstraints lgbc = new GridBagConstraints();
+        lgbc.weighty = 0.3;
+
+        lgbc.fill = GridBagConstraints.NONE;
+        lgbc.gridx = 0;
+
+        //logoL-------------------------
+        lgbc.gridy = 0;
+        leftPanel.add(logoL, lgbc);
+        //eXMember----------------------
+        lgbc.weighty = 1;
+        lgbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        lgbc.gridy = 1;
+        leftPanel.add(eXMemberL, lgbc);
+        //Sign_up-----------------------
+        lgbc.gridx = 1;
+        //lgbc.weightx = 0.1;
+        leftPanel.add(Sign_up, lgbc);
 
         //rightPanel Configuration
         rightPanel.setLayout(new GridBagLayout());
@@ -107,8 +148,11 @@ public class LogIn {
         logIn.getContentPane().add(rightPanel, BorderLayout.CENTER);
 
         //setting Form to visible
+        logIn.setResizable(false);
         logIn.setVisible(true);
     }
+
+
 
     public static void main(String[] args) {
         LogIn login = new LogIn();

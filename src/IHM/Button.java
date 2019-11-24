@@ -1,7 +1,10 @@
 package IHM;
 
+import org.w3c.dom.events.MouseEvent;
+
 import javax.swing.JButton;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class Button extends JButton {
 
