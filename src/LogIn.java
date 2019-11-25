@@ -23,7 +23,7 @@ public class LogIn {
     private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "E-mail");
     private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Password");
     private Label logoL = new Label();
-    private Label eXMemberL = new Label("Tahoma",Font.PLAIN, 12, Color.lightGray, "Already a member");
+    private Label eXMemberL = new Label("Tahoma",Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
