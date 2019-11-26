@@ -1,13 +1,9 @@
 import IHM.*;
-import IHM.*;
 import IHM.Button;
 import IHM.Label;
 import IHM.TextField;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -144,6 +140,7 @@ public class SignUp {
         mainGbc.gridx = 1;
         mainGbc.anchor = GridBagConstraints.LINE_START;
         mainPanel.add(student, mainGbc);
+        student.setSelected(true);
         //Teacher--------------------
         mainGbc.gridx = 2;
         mainPanel.add(teacher, mainGbc);
@@ -163,6 +160,173 @@ public class SignUp {
         botGbc.gridx = 3;
         botPanel.add(sign_Up, botGbc);
 
+        userNameF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                {
+                    userNameFFocusGained();
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                {
+                    userNameFFocusLost();
+                }
+            }
+        });
+
+        E_mailF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                {
+                    E_mailFFocusGained();
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                {
+                    E_mailFFocusLost();
+                }
+            }
+        });
+
+        PasswordF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                {
+                    PasswordFFocusGained();
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                {
+                    PasswordFFocusLost();
+                }
+            }
+        });
+
+        confirmF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                {
+                    confirmFFocusGained();
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                {
+                    confirmFFocusLost();
+                }
+
+            }
+        });
+
+        student.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                studentFocusGained();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+               studentFocusLost();
+            }
+        });
+
+        teacher.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                teacherFocusGained();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                teacherFocusLost();
+            }
+        });
+
+        teacher.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                teacherActionPerformed();
+            }
+        });
+
+        student.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                studentActionPerformed();
+            }
+        });
+
+        cancel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                cancelMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                cancelMouseEntered();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                cancelMouseExited();
+            }
+        });
+
+        sign_Up.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                signUpMouseEntered();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                signUpMouseExited();
+            }
+        });
+
         logo = new ImageIcon("IHMer.png");
 
         signUp.getContentPane().add(mainPanel, BorderLayout.CENTER);
@@ -178,5 +342,121 @@ public class SignUp {
         SignUp signup = new SignUp();
     }
 
+    public void userNameFFocusGained()
+    {
+        userNameF.setForeground(Orange);
+        userNameL.setForeground(Orange);
+        userNameS.setForeground(Orange);
+    }
 
+    public void userNameFFocusLost()
+    {
+        userNameF.setForeground(Color.gray);
+        userNameL.setForeground(Color.gray);
+        userNameS.setForeground(Color.gray);
+    }
+
+    public void E_mailFFocusGained()
+    {
+        E_mailF.setForeground(Orange);
+        E_mailL.setForeground(Orange);
+        E_mailS.setForeground(Orange);
+    }
+
+    public void E_mailFFocusLost()
+    {
+        E_mailF.setForeground(Color.gray);
+        E_mailL.setForeground(Color.gray);
+        E_mailS.setForeground(Color.gray);
+    }
+
+    public void PasswordFFocusGained()
+    {
+        PasswordF.setForeground(Orange);
+        PasswordL.setForeground(Orange);
+        PasswordS.setForeground(Orange);
+    }
+
+    public void PasswordFFocusLost()
+    {
+        PasswordF.setForeground(Color.gray);
+        PasswordL.setForeground(Color.gray);
+        PasswordS.setForeground(Color.gray);
+    }
+
+    public void confirmFFocusGained()
+    {
+        confirmF.setForeground(Orange);
+        confirmL.setForeground(Orange);
+        confirmS.setForeground(Orange);
+    }
+
+    public void confirmFFocusLost()
+    {
+        confirmF.setForeground(Color.gray);
+        confirmL.setForeground(Color.gray);
+        confirmS.setForeground(Color.gray);
+    }
+
+    public void studentFocusGained()
+    {
+        userProfileL.setForeground(Orange);
+        student.setForeground(Orange);
+        teacher.setForeground(Orange);
+    }
+
+    public void studentFocusLost()
+    {
+        userProfileL.setForeground(Color.gray);
+        student.setForeground(Color.gray);
+        teacher.setForeground(Color.gray);
+    }
+    public void teacherFocusGained()
+    {
+        userProfileL.setForeground(Orange);
+        student.setForeground(Orange);
+        teacher.setForeground(Orange);
+    }
+
+    public void teacherFocusLost()
+    {
+        userProfileL.setForeground(Color.gray);
+        student.setForeground(Color.gray);
+        teacher.setForeground(Color.gray);
+    }
+
+    public void cancelMouseClicked()
+    {
+        System.exit(0);
+    }
+    public void cancelMouseEntered()
+    {
+        cancel.setBackground(Color.GRAY);
+    }
+    public void cancelMouseExited()
+    {
+        cancel.setBackground(Dracula);
+    }
+
+    public void signUpMouseEntered()
+    {
+        sign_Up.setBackground(Color.GRAY);
+    }
+
+    public void signUpMouseExited()
+    {
+        sign_Up.setBackground(Dracula);
+    }
+
+    public void teacherActionPerformed()
+    {
+        teacher.setSelected(true);
+        student.setSelected(false);
+    }
+
+    public void studentActionPerformed()
+    {
+        student.setSelected(true);
+        teacher.setSelected(false);
+    }
 }
