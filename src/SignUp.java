@@ -2,6 +2,7 @@ import IHM.*;
 import IHM.Button;
 import IHM.Label;
 import IHM.TextField;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -9,9 +10,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class SignUp {
+public class SignUp { //i added botPanel for hadok l buttons li lta7t
     //declarations
-    private Form signUp = new Form(700, 440, "Sign Up");
+    private Form signUp = new Form(800, 600, "Sign Up");
 
     private Image logInIcon;
     private ImageIcon logo;
@@ -30,26 +31,22 @@ public class SignUp {
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
-
     private Separator userNameS = new Separator(240, Color.gray);
     private Separator confirmS = new Separator(240, Color.gray);
-
     private CheckBox student = new CheckBox(Dracula, Color.gray, "Student");
     private CheckBox teacher = new CheckBox(Dracula, Color.gray, "Teacher");
 
     private TextField E_mailF = new TextField(240, 30, Dracula, Color.gray);
     private PasswordField PasswordF = new PasswordField(240, 30, Dracula, Color.gray);
-
     private TextField userNameF = new TextField(240, 30, Dracula, Color.gray);
     private PasswordField confirmF = new PasswordField(240, 30, Dracula, Color.gray);
+    private MyPanel topPanel = new MyPanel(800, 150, Dracula);
+    private MyPanel mainPanel = new MyPanel(800, 200, Dracula);
+    private MyPanel botPanel = new MyPanel(800, 60, Dracula);
 
-    private MyPanel topPanel = new MyPanel(700, 100, Dracula);
-    private MyPanel mainPanel = new MyPanel(700, 310, Dracula);
-    private MyPanel botPanel =new MyPanel(700, 50, Dracula);
-
-    private Button cancel = new Button(80, 30, Orange, Dracula,"Cancel");
-    private Button sign_Up = new Button(85, 30, Orange, Dracula,"Sign Up");
-    private Button sign_In = new Button(80, 18, Orange, Dracula,"Sign In");
+    private Button cancel = new Button(80, 30, Orange, Dracula, "Cancel");
+    private Button sign_Up = new Button(85, 30, Orange, Dracula, "Sign Up");
+    private Button sign_In = new Button(80, 18, Orange, Dracula, "Sign In");
 
 
     public SignUp() {
@@ -127,14 +124,16 @@ public class SignUp {
         mainPanel.add(confirmL, mainGbc);
         //Confirm password field-----
         mainGbc.gridx = 1;
+        //mainGbc.weighty=-1;
         mainPanel.add(confirmF, mainGbc);
         //Confirm password separator-
         mainGbc.weighty = 1;
         mainGbc.gridy = 7;
         mainPanel.add(confirmS, mainGbc);
         //User ProfileL--------------
-        mainGbc.gridy = 8 ;
+        mainGbc.gridy = 8;
         mainGbc.gridx = 0;
+        mainGbc.weighty = -1;
         mainPanel.add(userProfileL, mainGbc);
         //Student--------------------
         mainGbc.gridx = 1;
@@ -148,11 +147,14 @@ public class SignUp {
         botGbc.anchor = GridBagConstraints.FIRST_LINE_START;
         botGbc.gridx = 0;
         botGbc.gridy = 0;
+        botGbc.weightx = 6;
+        botGbc.weighty = -9;
         botPanel.add(alreadyMember, botGbc);
         //sign_In-------------------
         botGbc.gridx = 1;
+        botGbc.weightx = 20;
         botPanel.add(sign_In, botGbc);
-       //Cancel button--------------
+        //Cancel button--------------
         botGbc.anchor = GridBagConstraints.FIRST_LINE_END;
         botGbc.gridx = 2;
         botPanel.add(cancel, botGbc);
@@ -233,7 +235,7 @@ public class SignUp {
 
             @Override
             public void focusLost(FocusEvent e) {
-               studentFocusLost();
+                studentFocusLost();
             }
         });
 
@@ -265,64 +267,54 @@ public class SignUp {
 
         cancel.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
                 cancelMouseClicked();
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
-            {
+            public void mousePressed(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
-            {
+            public void mouseReleased(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 cancelMouseEntered();
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
-            {
+            public void mouseExited(MouseEvent e) {
                 cancelMouseExited();
             }
         });
 
         sign_Up.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
 
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
-            {
+            public void mousePressed(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
-            {
+            public void mouseReleased(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 signUpMouseEntered();
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
-            {
+            public void mouseExited(MouseEvent e) {
                 signUpMouseExited();
             }
         });
@@ -339,123 +331,130 @@ public class SignUp {
     }
 
     public static void main(String[] args) {
+        // hada l code ta3 netbeans li bach yakhrj l cursseur mais ra7o seperatotrs :')
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        /*try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }*/
         SignUp signup = new SignUp();
+        //<
     }
 
-    public void userNameFFocusGained()
-    {
+    public void userNameFFocusGained() {
         userNameF.setForeground(Orange);
         userNameL.setForeground(Orange);
         userNameS.setForeground(Orange);
     }
 
-    public void userNameFFocusLost()
-    {
+    public void userNameFFocusLost() {
         userNameF.setForeground(Color.gray);
         userNameL.setForeground(Color.gray);
         userNameS.setForeground(Color.gray);
     }
 
-    public void E_mailFFocusGained()
-    {
+    public void E_mailFFocusGained() {
         E_mailF.setForeground(Orange);
         E_mailL.setForeground(Orange);
         E_mailS.setForeground(Orange);
     }
 
-    public void E_mailFFocusLost()
-    {
+    public void E_mailFFocusLost() {
         E_mailF.setForeground(Color.gray);
         E_mailL.setForeground(Color.gray);
         E_mailS.setForeground(Color.gray);
     }
 
-    public void PasswordFFocusGained()
-    {
+    public void PasswordFFocusGained() {
         PasswordF.setForeground(Orange);
         PasswordL.setForeground(Orange);
         PasswordS.setForeground(Orange);
     }
 
-    public void PasswordFFocusLost()
-    {
+    public void PasswordFFocusLost() {
         PasswordF.setForeground(Color.gray);
         PasswordL.setForeground(Color.gray);
         PasswordS.setForeground(Color.gray);
     }
 
-    public void confirmFFocusGained()
-    {
+    public void confirmFFocusGained() {
         confirmF.setForeground(Orange);
         confirmL.setForeground(Orange);
         confirmS.setForeground(Orange);
     }
 
-    public void confirmFFocusLost()
-    {
+    public void confirmFFocusLost() {
         confirmF.setForeground(Color.gray);
         confirmL.setForeground(Color.gray);
         confirmS.setForeground(Color.gray);
     }
 
-    public void studentFocusGained()
-    {
+    public void studentFocusGained() {
         userProfileL.setForeground(Orange);
         student.setForeground(Orange);
         teacher.setForeground(Orange);
     }
 
-    public void studentFocusLost()
-    {
+    public void studentFocusLost() {
         userProfileL.setForeground(Color.gray);
         student.setForeground(Color.gray);
         teacher.setForeground(Color.gray);
     }
-    public void teacherFocusGained()
-    {
+
+    public void teacherFocusGained() {
         userProfileL.setForeground(Orange);
         student.setForeground(Orange);
         teacher.setForeground(Orange);
     }
 
-    public void teacherFocusLost()
-    {
+    public void teacherFocusLost() {
         userProfileL.setForeground(Color.gray);
         student.setForeground(Color.gray);
         teacher.setForeground(Color.gray);
     }
 
-    public void cancelMouseClicked()
-    {
+    public void cancelMouseClicked() {
         System.exit(0);
     }
-    public void cancelMouseEntered()
-    {
+
+    public void cancelMouseEntered() {
         cancel.setBackground(Color.GRAY);
     }
-    public void cancelMouseExited()
-    {
+
+    public void cancelMouseExited() {
         cancel.setBackground(Dracula);
     }
 
-    public void signUpMouseEntered()
-    {
+    public void signUpMouseEntered() {
         sign_Up.setBackground(Color.GRAY);
     }
 
-    public void signUpMouseExited()
-    {
+    public void signUpMouseExited() {
         sign_Up.setBackground(Dracula);
     }
 
-    public void teacherActionPerformed()
-    {
+    public void teacherActionPerformed() {
         teacher.setSelected(true);
         student.setSelected(false);
     }
 
-    public void studentActionPerformed()
-    {
+    public void studentActionPerformed() {
         student.setSelected(true);
         teacher.setSelected(false);
     }
