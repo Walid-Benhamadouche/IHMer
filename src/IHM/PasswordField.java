@@ -3,12 +3,12 @@ package IHM;
 import javax.swing.JPasswordField;
 import java.awt.*;
 
-public class PasswordField extends JPasswordField{
+public class PasswordField extends JPasswordField {
 
     private Font defaultFont = new Font("Tahoma", Font.BOLD, 12);
     private Dimension defaultDim;
-    public PasswordField(int x, int y, Color backGround, Color foreGround)
-    {
+
+    public PasswordField(int x, int y, Color backGround, Color foreGround) {
         defaultDim = new Dimension(x, y);
         this.setBackground(backGround);
         this.setForeground(foreGround);

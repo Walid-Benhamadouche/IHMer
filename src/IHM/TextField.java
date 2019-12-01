@@ -1,6 +1,6 @@
 package IHM;
 
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.*;
 
 public class TextField extends JTextField {

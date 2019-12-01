@@ -2,6 +2,7 @@ import IHM.*;
 import IHM.Button;
 import IHM.Label;
 import IHM.TextField;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -12,18 +13,18 @@ import javax.swing.ImageIcon;
 public class LogIn {
 
     //declarations
-    private Form logIn = new Form(720,390,"Log In");
+    private Form logIn = new Form(720, 390, "Log In");
 
     private Image logInIcon;
     private ImageIcon logo;
-    private Color Dracula = new Color(45,52,54);
-    private Color Orange = new Color(230,145,56);
+    private Color Dracula = new Color(45, 52, 54);
+    private Color Orange = new Color(230, 145, 56);
 
     private Label SignInText = new Label("Times New Roman", Font.PLAIN, 36, Orange, "Sign In");
     private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "E-mail");
     private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Password");
     private Label logoL = new Label();
-    private Label eXMemberL = new Label("Tahoma",Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
+    private Label eXMemberL = new Label("Tahoma", Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -33,16 +34,15 @@ public class LogIn {
 
     private CheckBox RememberMe = new CheckBox(Dracula, Color.gray, "Remember me");
 
-    private Button Cancel = new Button(80, 30, Orange, Dracula,"Cancel");
-    private Button Sign_in = new Button(80, 30, Orange, Dracula,"Sign in");
-    private Button Sign_up = new Button(85,18, Orange, Dracula, "Sign up");
+    private Button Cancel = new Button(80, 30, Orange, Dracula, "Cancel");
+    private Button Sign_in = new Button(80, 30, Orange, Dracula, "Sign in");
+    private Button Sign_up = new Button(85, 18, Orange, Dracula, "Sign up");
 
     private MyPanel topPanel = new MyPanel(720, 80, Dracula);
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
     private MyPanel rightPanel = new MyPanel(360, 310, Dracula);
 
-    public LogIn()
-    {
+    public LogIn() {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -125,146 +125,119 @@ public class LogIn {
         logIn.getContentPane().add(leftPanel, BorderLayout.WEST);
         logIn.getContentPane().add(rightPanel, BorderLayout.CENTER);
 
-        Cancel.addMouseListener(new MouseListener()
-        {
+        Cancel.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
                 cancelMouseClicked();
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
-            {
+            public void mousePressed(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
-            {
+            public void mouseReleased(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 cancelMouseEntered();
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
-            {
+            public void mouseExited(MouseEvent e) {
                 cancelMouseExited();
             }
         });
 
-        Sign_in.addMouseListener(new MouseListener()
-        {
+        Sign_in.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
 
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
-            {
+            public void mousePressed(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
-            {
+            public void mouseReleased(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
                 signInMouseEntered();
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
-            {
+            public void mouseExited(MouseEvent e) {
                 signInMouseExited();
             }
         });
 
-        Sign_up.addMouseListener(new MouseListener()
-        {
+        Sign_up.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e)
-            {
+            public void mouseClicked(MouseEvent e) {
 
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
-            {
+            public void mousePressed(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
-            {
+            public void mouseReleased(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
-            {
+            public void mouseEntered(MouseEvent e) {
 
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
-            {
+            public void mouseExited(MouseEvent e) {
 
             }
         });
 
-        E_mailF.addFocusListener(new FocusListener()
-        {
+        E_mailF.addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent e)
-            {
+            public void focusGained(FocusEvent e) {
                 e_mailFFocusGained();
             }
 
             @Override
-            public void focusLost(FocusEvent e)
-            {
+            public void focusLost(FocusEvent e) {
                 e_mailFFocusLost();
             }
         });
 
-        PasswordF.addFocusListener(new FocusListener()
-        {
+        PasswordF.addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent e)
-            {
+            public void focusGained(FocusEvent e) {
                 PasswordFFocusGained();
             }
 
             @Override
-            public void focusLost(FocusEvent e)
-            {
+            public void focusLost(FocusEvent e) {
                 PasswordFFocusLost();
             }
         });
 
-        RememberMe.addFocusListener(new FocusListener()
-        {
+        RememberMe.addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent e)
-            {
+            public void focusGained(FocusEvent e) {
                 rememberMeFocusGained();
             }
 
             @Override
-            public void focusLost(FocusEvent e)
-            {
+            public void focusLost(FocusEvent e) {
                 rememberMeFocusLost();
             }
         });
@@ -273,64 +246,56 @@ public class LogIn {
         logIn.setResizable(false);
         logIn.setVisible(true);
     }
-    public void cancelMouseClicked()
-    {
+
+    public void cancelMouseClicked() {
         System.exit(0);
     }
-    public void cancelMouseEntered()
-    {
+
+    public void cancelMouseEntered() {
         Cancel.setBackground(Color.GRAY);
     }
-    public void cancelMouseExited()
-    {
+
+    public void cancelMouseExited() {
         Cancel.setBackground(Dracula);
     }
 
-    public void signInMouseEntered()
-    {
+    public void signInMouseEntered() {
         Sign_in.setBackground(Color.GRAY);
     }
 
-    public void signInMouseExited()
-    {
+    public void signInMouseExited() {
         Sign_in.setBackground(Dracula);
     }
 
-    public void e_mailFFocusGained()
-    {
+    public void e_mailFFocusGained() {
         E_mailF.setForeground(Orange);
         E_mailL.setForeground(Orange);
         E_mailS.setForeground(Orange);
     }
 
-    public void e_mailFFocusLost()
-    {
+    public void e_mailFFocusLost() {
         E_mailF.setForeground(Color.gray);
         E_mailL.setForeground(Color.gray);
         E_mailS.setForeground(Color.gray);
     }
 
-    public void PasswordFFocusGained()
-    {
+    public void PasswordFFocusGained() {
         PasswordF.setForeground(Orange);
         PasswordL.setForeground(Orange);
         PasswordS.setForeground(Orange);
     }
 
-    public void PasswordFFocusLost()
-    {
+    public void PasswordFFocusLost() {
         PasswordF.setForeground(Color.gray);
         PasswordL.setForeground(Color.gray);
         PasswordS.setForeground(Color.gray);
     }
 
-    public void rememberMeFocusGained()
-    {
+    public void rememberMeFocusGained() {
         RememberMe.setForeground(Orange);
     }
 
-    public void rememberMeFocusLost()
-    {
+    public void rememberMeFocusLost() {
         RememberMe.setForeground(Color.gray);
     }
 
