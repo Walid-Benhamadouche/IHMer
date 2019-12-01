@@ -27,7 +27,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private Label userNameL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "User Name   ");
     private Label confirmL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Confirm   ");
     private Label userProfileL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "User Profile   ");
-    private Label alreadyMember = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Already a member ?");
+    private Label alreadyMember = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "       Already a member ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -156,10 +156,10 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         botPanel.add(sign_In, botGbc);
         //Cancel button--------------
         botGbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        botGbc.gridx = 2;
+        botGbc.gridx = 3;
         botPanel.add(cancel, botGbc);
         //Sign_Up button-------------
-        botGbc.gridx = 3;
+        botGbc.gridx = 4;
         botPanel.add(sign_Up, botGbc);
 
         userNameF.addFocusListener(new FocusListener() {
@@ -354,7 +354,6 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
             java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }*/
         SignUp signup = new SignUp();
-        //<
     }
 
     public void userNameFFocusGained() {
