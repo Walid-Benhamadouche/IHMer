@@ -8,7 +8,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
+
+import java.sql.*;
 
 public class SignUp { //i added botPanel for hadok l buttons li lta7t
     //declarations
@@ -295,7 +297,11 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         sign_Up.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                try {
+                    signUpMouseClicked();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -442,6 +448,31 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
 
     public void signUpMouseEntered() {
         sign_Up.setBackground(Color.GRAY);
+    }
+
+    public void signUpMouseClicked() throws SQLException {
+        String userName = userNameF.getText();
+        String eMail = E_mailF.getText();
+        String password = String.valueOf(PasswordF.getPassword());
+        String confirmPassword = String.valueOf(confirmF.getPassword());
+
+        if(userName.equals("")) { JOptionPane.showMessageDialog( null, "Add a user name"); }
+        else if(eMail.equals("")) { JOptionPane.showMessageDialog( null, "add an email"); }
+        else if(password.equals("")) { JOptionPane.showMessageDialog( null, "add a password"); }
+        else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
+        else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
+
+        String query = "INSERT INTO user (email,password,username) VALUES ("+eMail+","+password+","+userName+")";
+
+        try
+        {
+            Statement stm = dbConnection.getConnection().createStatement();
+            ResultSet rs = stm.executeQuery(query);
+
+        }catch(SQLException ex)
+        {
+
+        }
     }
 
     public void signUpMouseExited() {
