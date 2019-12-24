@@ -337,28 +337,6 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     }
 
     public static void main(String[] args) {
-        // hada l code ta3 netbeans li bach yakhrj l cursseur mais ra7o seperatotrs :')
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
         SignUp signup = new SignUp();
     }
 
@@ -462,7 +440,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
         else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
 
-        String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
+        String query = "insert into user (email, password, username)"+"VALUES (?,?,?)";
 
         try
         {
@@ -473,7 +451,6 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
             ps.setString(1,eMail);
             ps.setString(2,password);
             ps.setString(3,userName);
-            ps.setString(4,"student");
 
             ps.execute();
 

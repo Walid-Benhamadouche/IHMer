@@ -38,7 +38,7 @@ public class IHMer {
 
     private Home home = new Home();
 
-    public IHMer() {
+    public IHMer(int id) {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -46,6 +46,8 @@ public class IHMer {
         }
         ihmWin.setIconImage(logInIcon);
         ihmWin.setLayout(new BorderLayout());
+
+        System.out.print(id);
 
         //images
         logo = new ImageIcon("IHMer.png");
@@ -99,6 +101,6 @@ public class IHMer {
     }
 
     public static void main(String[] args) {
-        IHMer win = new IHMer();
+        IHMer win = new IHMer(0);
     }
 }

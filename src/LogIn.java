@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import java.sql.*;
+
 public class LogIn {
 
     //declarations
@@ -155,7 +157,13 @@ public class LogIn {
         Sign_in.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                try {
+                    signInMouseClicked();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -265,6 +273,25 @@ public class LogIn {
 
     public void signInMouseExited() {
         Sign_in.setBackground(Dracula);
+    }
+
+    public void signInMouseClicked() throws SQLException, ClassNotFoundException
+    {
+        String email = E_mailF.getText();
+        String password = String.valueOf(PasswordF.getPassword());
+
+        String query = "select email, password from user where `email` = ? and `password`=?";
+
+        Connection con = dbConnection.getConnection() ;
+
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+
+        int id = rs.getInt("idus");
+        IHMer ihmer = new IHMer(id);
+        logIn.dispose();
     }
 
     public void e_mailFFocusGained() {
