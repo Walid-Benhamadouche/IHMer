@@ -462,16 +462,24 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
         else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
 
-        String query = "INSERT INTO user (email,password,username) VALUES ("+eMail+","+password+","+userName+")";
+        String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
 
         try
         {
-            Statement stm = dbConnection.getConnection().createStatement();
-            ResultSet rs = stm.executeQuery(query);
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+           // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
+            Connection con = dbConnection.getConnection() ;
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,eMail);
+            ps.setString(2,password);
+            ps.setString(3,userName);
+            ps.setString(4,"student");
 
-        }catch(SQLException ex)
+            ps.execute();
+
+        }catch(SQLException | ClassNotFoundException ex)
         {
-
+            JOptionPane.showMessageDialog( null, "error");
         }
     }
 
