@@ -14,4 +14,10 @@ public class Label extends JLabel{
         this.setForeground(foreGround);
         this.setText(text);
     }
+
+    public Label(Color color, int x ,int y)
+    {
+        this.setBackground(color);
+        this.setPreferredSize(new Dimension(x,y));
+    }
 }

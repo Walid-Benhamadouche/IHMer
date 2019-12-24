@@ -32,9 +32,11 @@ public class IHMer {
     private Image logInIcon;
     private ImageIcon logo;
     private ImageIcon sideMenu;
-    private ImageIcon home;
+    private ImageIcon homeI;
     private ImageIcon questions;
     private ImageIcon profile;
+
+    private Home home = new Home();
 
     public IHMer() {
         try {
@@ -50,8 +52,8 @@ public class IHMer {
         logoL.setIcon(logo);
         sideMenu = new ImageIcon("IHMerMini.png");
         sideMenuL.setIcon(sideMenu);
-        home = new ImageIcon("IHMerMini.png");
-        homeL.setIcon(home);
+        homeI = new ImageIcon("IHMerMini.png");
+        homeL.setIcon(homeI);
         questions = new ImageIcon("IHMerMini.png");
         questionsL.setIcon(questions);
         profile = new ImageIcon("IHMerMini.png");
@@ -90,6 +92,7 @@ public class IHMer {
 
         //setting up panels after loading
         ihmWin.getContentPane().add(topMenuBar, BorderLayout.NORTH);
+        ihmWin.getContentPane().add(home, BorderLayout.CENTER);
 
         //setting window visibility to true
         ihmWin.setVisible(true);
