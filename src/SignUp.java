@@ -51,7 +51,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private Button sign_In = new Button(80, 18, Orange, Dracula, "Sign In");
 
 
-    public SignUp() {
+    private SignUp() {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -253,19 +253,9 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
             }
         });
 
-        teacher.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                teacherActionPerformed();
-            }
-        });
+        teacher.addActionListener(e -> teacherActionPerformed());
 
-        student.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                studentActionPerformed();
-            }
-        });
+        student.addActionListener(e -> studentActionPerformed());
 
         cancel.addMouseListener(new MouseListener() {
             @Override
@@ -297,11 +287,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         sign_Up.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                try {
-                    signUpMouseClicked();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                signUpMouseClicked();
             }
 
             @Override
@@ -337,124 +323,109 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     }
 
     public static void main(String[] args) {
-        // hada l code ta3 netbeans li bach yakhrj l cursseur mais ra7o seperatotrs :')
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        /*try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
         SignUp signup = new SignUp();
     }
 
-    public void userNameFFocusGained() {
+    private void userNameFFocusGained() {
         userNameF.setForeground(Orange);
         userNameL.setForeground(Orange);
         userNameS.setForeground(Orange);
     }
 
-    public void userNameFFocusLost() {
+    private void userNameFFocusLost() {
         userNameF.setForeground(Color.gray);
         userNameL.setForeground(Color.gray);
         userNameS.setForeground(Color.gray);
     }
 
-    public void E_mailFFocusGained() {
+    private void E_mailFFocusGained() {
         E_mailF.setForeground(Orange);
         E_mailL.setForeground(Orange);
         E_mailS.setForeground(Orange);
     }
 
-    public void E_mailFFocusLost() {
+    private void E_mailFFocusLost() {
         E_mailF.setForeground(Color.gray);
         E_mailL.setForeground(Color.gray);
         E_mailS.setForeground(Color.gray);
     }
 
-    public void PasswordFFocusGained() {
+    private void PasswordFFocusGained() {
         PasswordF.setForeground(Orange);
         PasswordL.setForeground(Orange);
         PasswordS.setForeground(Orange);
     }
 
-    public void PasswordFFocusLost() {
+    private void PasswordFFocusLost() {
         PasswordF.setForeground(Color.gray);
         PasswordL.setForeground(Color.gray);
         PasswordS.setForeground(Color.gray);
     }
 
-    public void confirmFFocusGained() {
+    private void confirmFFocusGained() {
         confirmF.setForeground(Orange);
         confirmL.setForeground(Orange);
         confirmS.setForeground(Orange);
     }
 
-    public void confirmFFocusLost() {
+    private void confirmFFocusLost() {
         confirmF.setForeground(Color.gray);
         confirmL.setForeground(Color.gray);
         confirmS.setForeground(Color.gray);
     }
 
-    public void studentFocusGained() {
+    private void studentFocusGained() {
         userProfileL.setForeground(Orange);
         student.setForeground(Orange);
         teacher.setForeground(Orange);
     }
 
-    public void studentFocusLost() {
+    private void studentFocusLost() {
         userProfileL.setForeground(Color.gray);
         student.setForeground(Color.gray);
         teacher.setForeground(Color.gray);
     }
 
-    public void teacherFocusGained() {
+    private void teacherFocusGained() {
         userProfileL.setForeground(Orange);
         student.setForeground(Orange);
         teacher.setForeground(Orange);
     }
 
-    public void teacherFocusLost() {
+    private void teacherFocusLost() {
         userProfileL.setForeground(Color.gray);
         student.setForeground(Color.gray);
         teacher.setForeground(Color.gray);
     }
 
-    public void cancelMouseClicked() {
+    private void cancelMouseClicked() {
         System.exit(0);
     }
 
-    public void cancelMouseEntered() {
+    private void cancelMouseEntered() {
         cancel.setBackground(Color.GRAY);
     }
 
-    public void cancelMouseExited() {
+    private void cancelMouseExited() {
         cancel.setBackground(Dracula);
     }
 
-    public void signUpMouseEntered() {
+    private void signUpMouseEntered() {
         sign_Up.setBackground(Color.GRAY);
     }
 
-    public void signUpMouseClicked() throws SQLException {
+    private void signUpMouseClicked() {
         String userName = userNameF.getText();
         String eMail = E_mailF.getText();
         String password = String.valueOf(PasswordF.getPassword());
         String confirmPassword = String.valueOf(confirmF.getPassword());
+        String profile;
+        int idus = 0;
+
+        if(student.isSelected())
+            profile = "student";
+        else
+            profile ="teacher";
 
         if(userName.equals("")) { JOptionPane.showMessageDialog( null, "Add a user name"); }
         else if(eMail.equals("")) { JOptionPane.showMessageDialog( null, "add an email"); }
@@ -462,29 +433,58 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
         else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
 
-        String query = "INSERT INTO user (email,password,username) VALUES ("+eMail+","+password+","+userName+")";
-
+        String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
+        String query1 = "insert into "+profile+" (idus)"+"VALUES (?)";
+        String query2 = "select email, password from user where `email` = ? and `password`=?";
         try
         {
-            Statement stm = dbConnection.getConnection().createStatement();
-            ResultSet rs = stm.executeQuery(query);
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+           // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
+            Connection con = dbConnection.getConnection() ;
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps1 = con.prepareStatement(query1);
 
-        }catch(SQLException ex)
+            ps.setString(1,eMail);
+            ps.setString(2,password);
+            ps.setString(3,userName);
+            ps.setString(4,profile);
+            ps.execute();
+            ResultSet res = ps.getGeneratedKeys();
+            while (res.next())
+            {
+                idus = res.getInt(1);
+            }
+            System.out.print(idus);
+            ps1.setInt(1,idus);
+            ps1.execute();
+            //hadi kima ta3 log in copy past
+            PreparedStatement ps2 = con.prepareStatement(query2);
+            ps2.setString(1, eMail);
+            ps2.setString(2, password);
+            ResultSet rs = ps2.executeQuery();
+
+            rs.next();
+
+            IHMer ihmer = new IHMer(rs);
+            signUp.dispose();
+
+        }catch(SQLException | ClassNotFoundException ex)
         {
-
+            JOptionPane.showMessageDialog( null, "error");
         }
+
     }
 
-    public void signUpMouseExited() {
+    private void signUpMouseExited() {
         sign_Up.setBackground(Dracula);
     }
 
-    public void teacherActionPerformed() {
+    private void teacherActionPerformed() {
         teacher.setSelected(true);
         student.setSelected(false);
     }
 
-    public void studentActionPerformed() {
+    private void studentActionPerformed() {
         student.setSelected(true);
         teacher.setSelected(false);
     }
