@@ -464,6 +464,8 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
             ps.setString(3,userName);
             ps.setString(4,profile);
 
+            ResultSet rs = ps.executeQuery();
+
             ResultSet res = ps.getGeneratedKeys();
             while (res.next())
             {
@@ -471,12 +473,17 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
             }
             System.out.print(idus);
             //ps1.setInt(1,idus);
-            //ps.execute();
+            //ps1.execute();
+
 
         }catch(SQLException | ClassNotFoundException ex)
         {
             JOptionPane.showMessageDialog( null, "error");
         }
+
+        //IHMer ihmer = new IHMer(rs);
+        //signUp.dispose();
+
     }
 
     public void signUpMouseExited() {
