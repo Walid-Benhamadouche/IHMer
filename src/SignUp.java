@@ -433,6 +433,15 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         String eMail = E_mailF.getText();
         String password = String.valueOf(PasswordF.getPassword());
         String confirmPassword = String.valueOf(confirmF.getPassword());
+        String profile;
+        int idus = 0;
+
+        boolean studentSelected = student.isSelected();
+
+        if(studentSelected)
+            profile = "student";
+        else
+            profile ="teacher";
 
         if(userName.equals("")) { JOptionPane.showMessageDialog( null, "Add a user name"); }
         else if(eMail.equals("")) { JOptionPane.showMessageDialog( null, "add an email"); }
@@ -440,19 +449,29 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
         else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
         else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
 
-        String query = "insert into user (email, password, username)"+"VALUES (?,?,?)";
-
+        String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
+        String query1 = "insert into "+profile+" (idus)"+"VALUES (?)";
         try
         {
             //Class.forName("com.mysql.cj.jdbc.Driver");
            // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
             Connection con = dbConnection.getConnection() ;
             PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps1 = con.prepareStatement(query1);
+
             ps.setString(1,eMail);
             ps.setString(2,password);
             ps.setString(3,userName);
+            ps.setString(4,profile);
 
-            ps.execute();
+            ResultSet res = ps.getGeneratedKeys();
+            while (res.next())
+            {
+                idus = res.getInt(1);
+            }
+            System.out.print(idus);
+            //ps1.setInt(1,idus);
+            //ps.execute();
 
         }catch(SQLException | ClassNotFoundException ex)
         {

@@ -289,8 +289,9 @@ public class LogIn {
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
 
-        int id = rs.getInt("idus");
-        IHMer ihmer = new IHMer(id);
+        rs.next();
+
+        IHMer ihmer = new IHMer(rs);
         logIn.dispose();
     }
 

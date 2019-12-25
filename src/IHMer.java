@@ -1,12 +1,15 @@
 import IHM.*;
 import IHM.Label;
 import IHM.TextField;
+import com.mysql.cj.xdevapi.Result;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class IHMer {
     //declaration
@@ -38,7 +41,7 @@ public class IHMer {
 
     private Home home = new Home();
 
-    public IHMer(int id) {
+    public IHMer(ResultSet rs) throws SQLException {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -46,8 +49,8 @@ public class IHMer {
         }
         ihmWin.setIconImage(logInIcon);
         ihmWin.setLayout(new BorderLayout());
-
-        System.out.print(id);
+        //to test profile passage
+        System.out.print(rs.getString("email")+" "+rs.getString("password"));
 
         //images
         logo = new ImageIcon("IHMer.png");
@@ -100,7 +103,7 @@ public class IHMer {
         ihmWin.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        IHMer win = new IHMer(0);
-    }
+    /*public static void main(String[] args) {
+        IHMer win = new IHMer();
+    }*/
 }
