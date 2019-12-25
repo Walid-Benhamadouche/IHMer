@@ -451,38 +451,43 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
 
         String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
         String query1 = "insert into "+profile+" (idus)"+"VALUES (?)";
+        String query2 = "select email, password from user where `email` = ? and `password`=?";
         try
         {
             //Class.forName("com.mysql.cj.jdbc.Driver");
            // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
             Connection con = dbConnection.getConnection() ;
-            PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps1 = con.prepareStatement(query1);
 
             ps.setString(1,eMail);
             ps.setString(2,password);
             ps.setString(3,userName);
             ps.setString(4,profile);
-
-            ResultSet rs = ps.executeQuery();
-
+            ps.execute();
             ResultSet res = ps.getGeneratedKeys();
             while (res.next())
             {
                 idus = res.getInt(1);
             }
             System.out.print(idus);
-            //ps1.setInt(1,idus);
-            //ps1.execute();
+            ps1.setInt(1,idus);
+            ps1.execute();
 
+            PreparedStatement ps2 = con.prepareStatement(query2);
+            ps2.setString(1, eMail);
+            ps2.setString(2, password);
+            ResultSet rs = ps2.executeQuery();
+
+            rs.next();
+
+            IHMer ihmer = new IHMer(rs);
+            signUp.dispose();
 
         }catch(SQLException | ClassNotFoundException ex)
         {
             JOptionPane.showMessageDialog( null, "error");
         }
-
-        //IHMer ihmer = new IHMer(rs);
-        //signUp.dispose();
 
     }
 

@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 import java.sql.*;
 
@@ -157,13 +157,7 @@ public class LogIn {
         Sign_in.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                try {
-                    signInMouseClicked();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+                signInMouseClicked();
             }
 
             @Override
@@ -275,24 +269,29 @@ public class LogIn {
         Sign_in.setBackground(Dracula);
     }
 
-    public void signInMouseClicked() throws SQLException, ClassNotFoundException
+    public void signInMouseClicked()
     {
-        String email = E_mailF.getText();
-        String password = String.valueOf(PasswordF.getPassword());
+        try {
+            String email = E_mailF.getText();
+            String password = String.valueOf(PasswordF.getPassword());
 
-        String query = "select email, password from user where `email` = ? and `password`=?";
+            String query = "select email, password from user where `email` = ? and `password`=?";
 
-        Connection con = dbConnection.getConnection() ;
+            Connection con = dbConnection.getConnection();
 
-        PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, email);
-        ps.setString(2, password);
-        ResultSet rs = ps.executeQuery();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
 
-        rs.next();
+            rs.next();
 
-        IHMer ihmer = new IHMer(rs);
-        logIn.dispose();
+            IHMer ihmer = new IHMer(rs);
+            logIn.dispose();
+            }catch (SQLException | ClassNotFoundException e)
+                    {
+                        JOptionPane.showMessageDialog( null, "email or password wrong");
+                    }
     }
 
     public void e_mailFFocusGained() {
