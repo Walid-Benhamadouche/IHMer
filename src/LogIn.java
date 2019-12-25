@@ -44,7 +44,7 @@ public class LogIn {
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
     private MyPanel rightPanel = new MyPanel(360, 310, Dracula);
 
-    public LogIn() {
+    private LogIn() {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -249,27 +249,27 @@ public class LogIn {
         logIn.setVisible(true);
     }
 
-    public void cancelMouseClicked() {
+    private void cancelMouseClicked() {
         System.exit(0);
     }
 
-    public void cancelMouseEntered() {
+    private void cancelMouseEntered() {
         Cancel.setBackground(Color.GRAY);
     }
 
-    public void cancelMouseExited() {
+    private void cancelMouseExited() {
         Cancel.setBackground(Dracula);
     }
 
-    public void signInMouseEntered() {
+    private void signInMouseEntered() {
         Sign_in.setBackground(Color.GRAY);
     }
 
-    public void signInMouseExited() {
+    private void signInMouseExited() {
         Sign_in.setBackground(Dracula);
     }
 
-    public void signInMouseClicked()
+    private void signInMouseClicked()
     {
         try {
             String email = E_mailF.getText();
@@ -294,35 +294,35 @@ public class LogIn {
                     }
     }
 
-    public void e_mailFFocusGained() {
+    private void e_mailFFocusGained() {
         E_mailF.setForeground(Orange);
         E_mailL.setForeground(Orange);
         E_mailS.setForeground(Orange);
     }
 
-    public void e_mailFFocusLost() {
+    private void e_mailFFocusLost() {
         E_mailF.setForeground(Color.gray);
         E_mailL.setForeground(Color.gray);
         E_mailS.setForeground(Color.gray);
     }
 
-    public void PasswordFFocusGained() {
+    private void PasswordFFocusGained() {
         PasswordF.setForeground(Orange);
         PasswordL.setForeground(Orange);
         PasswordS.setForeground(Orange);
     }
 
-    public void PasswordFFocusLost() {
+    private void PasswordFFocusLost() {
         PasswordF.setForeground(Color.gray);
         PasswordL.setForeground(Color.gray);
         PasswordS.setForeground(Color.gray);
     }
 
-    public void rememberMeFocusGained() {
+    private void rememberMeFocusGained() {
         RememberMe.setForeground(Orange);
     }
 
-    public void rememberMeFocusLost() {
+    private void rememberMeFocusLost() {
         RememberMe.setForeground(Color.gray);
     }
 
