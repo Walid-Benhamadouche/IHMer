@@ -1,5 +1,11 @@
 package IHM;
+import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.*;
+import java.sql.*;
 
 public class Home extends MyPanel {
 
@@ -13,6 +19,7 @@ public class Home extends MyPanel {
     private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
     private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
     private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label addLesson = new Label();
 
     private MyPanel lessonsP = new MyPanel(Dracula);
     private MyPanel lessonsPC = new MyPanel(Color.gray);
@@ -29,13 +36,29 @@ public class Home extends MyPanel {
     private MyPanel empty5 = new MyPanel(Color.GREEN);
     private MyPanel empty6 = new MyPanel(Color.GREEN);
 
+    private ImageIcon addIcon;
 
     //jTextPane
     //private TextField post = new TextField(400, 100, new Color(255, 229, 153), new Color(49, 53, 57));
 
-    public Home()
-    {
+    public Home(ResultSet rsu) throws SQLException, ClassNotFoundException {
         //postP
+
+        //lessonPC
+        lessonsPC.setLayout(new GridLayout());
+        String query = "select * from lesson";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        for(int i=0; rs.next() && i<4; i++)
+        {
+           lessonsPC.add(new dataField(rs));
+        }
+
+        //add a lesson function
+        addIcon = new ImageIcon("IHMer.png");
+        addLesson.setIcon(addIcon);
+        lessonsPC.add(addLesson);
 
         //lessonsP
         empty1.setPreferredSize(new Dimension(10,20));
@@ -139,6 +162,89 @@ public class Home extends MyPanel {
         this.add(importantP);
         this.add(videosP);
         this.add(quoteP);
+
+        addLesson.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                try {
+                    addLessonMouseClicked(rsu);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void addLessonMouseClicked(ResultSet rsu) throws SQLException, ClassNotFoundException, FileNotFoundException {
+
+        JLabel l = new JLabel();
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+        // invoke the showsOpenDialog function to show the save dialog
+        int r = j.showOpenDialog(null);
+
+        // if the user selects a file
+        if (r == JFileChooser.APPROVE_OPTION)
+
+        {
+            // set the label to the path of the selected file
+            l.setText(j.getSelectedFile().getAbsolutePath());
+        }
+
+        File file = new File(l.getText());
+        FileInputStream input = new FileInputStream(file);
+        JOptionPane.showMessageDialog( null, l.getText());
+
+        String queryS = "SELECT idt FROM teacher WHERE idus = ?";
+        String queryI = "insert into lesson (idt, lesson, name)"+"VALUES (?,?,?)";
+
+        JOptionPane.showMessageDialog( null, rsu.getInt("idus"));
+
+        Connection con = dbConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement(queryS, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, rsu.getInt("idus"));
+        JOptionPane.showMessageDialog( null, "connection established and statement created");
+
+
+        JOptionPane.showMessageDialog( null, "statement ready");
+        System.out.print(ps);
+        ResultSet rsS= ps.executeQuery();
+        rsS.next();
+        JOptionPane.showMessageDialog( null, "executed");
+
+        PreparedStatement ps1 = con.prepareStatement(queryI);
+
+        JOptionPane.showMessageDialog( null, rsS.getInt("idt"));
+        ps1.setInt(1, rsS.getInt("idt"));
+        ps1.setBlob(2, input);
+        ps1.setString(3, file.getName());
+        ps1.execute();
+
     }
 
 }

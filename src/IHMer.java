@@ -1,7 +1,6 @@
 import IHM.*;
 import IHM.Label;
 import IHM.TextField;
-import com.mysql.cj.xdevapi.Result;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -39,9 +38,9 @@ public class IHMer {
     private ImageIcon questions;
     private ImageIcon profile;
 
-    private Home home = new Home();
 
-    public IHMer(ResultSet rs) throws SQLException {
+    public IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
+        Home home = new Home(rs);
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
