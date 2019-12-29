@@ -51,7 +51,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private Button sign_In = new Button(80, 18, Orange, Dracula, "Sign In");
 
 
-    private SignUp() {
+    public SignUp() {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -322,10 +322,6 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
 
     }
 
-    public static void main(String[] args) {
-        SignUp signup = new SignUp();
-    }
-
     private void userNameFFocusGained() {
         userNameF.setForeground(Orange);
         userNameL.setForeground(Orange);
@@ -435,11 +431,11 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
 
         String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
         String query1 = "insert into "+profile+" (idus)"+"VALUES (?)";
-        String query2 = "select email, password from user where `email` = ? and `password`=?";
+        String query2 = "select * from user where `email` = ? and `password`=?";
         try
         {
             //Class.forName("com.mysql.cj.jdbc.Driver");
-           // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
             Connection con = dbConnection.getConnection() ;
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps1 = con.prepareStatement(query1);
@@ -470,7 +466,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
 
         }catch(SQLException | ClassNotFoundException ex)
         {
-            JOptionPane.showMessageDialog( null, "error");
+            JOptionPane.showMessageDialog( null, ex.getMessage());
         }
 
     }

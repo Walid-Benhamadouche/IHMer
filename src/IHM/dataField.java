@@ -66,7 +66,6 @@ public class dataField extends Label{
             // set the label to the path of the selected file
             l.setText(j.getSelectedFile().getAbsolutePath());
         }
-
         //+rs.getString("name")
         File file = new File(l.getText());
         FileOutputStream output = new FileOutputStream(file);

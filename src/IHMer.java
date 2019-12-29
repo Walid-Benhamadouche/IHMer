@@ -1,6 +1,5 @@
 import IHM.*;
 import IHM.Label;
-import IHM.TextField;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -17,7 +16,6 @@ public class IHMer {
     private Form ihmWin = new Form(screenSize.width, screenSize.height, "IHMer");
 
     private Color Dracula = new Color(45, 52, 54);
-    private Color backColor = new Color(230, 145, 56);
     private Color topBar = new Color(238, 186, 43);
 
     private Label logoL = new Label();
@@ -29,8 +27,6 @@ public class IHMer {
     private MyPanel loadingScreen = new MyPanel(Dracula);
     private MyPanel topMenuBar = new MyPanel(screenSize.width, 50, topBar);
 
-    private TextField searchBar = new TextField(240, 30, backColor, Color.gray);
-
     private Image logInIcon;
     private ImageIcon logo;
     private ImageIcon sideMenu;
@@ -40,7 +36,6 @@ public class IHMer {
 
 
     public IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
-        Home home = new Home(rs);
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -96,13 +91,19 @@ public class IHMer {
 
         //setting up panels after loading
         ihmWin.getContentPane().add(topMenuBar, BorderLayout.NORTH);
-        ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+        if(rs.getString("profile").equals("teacher"))
+        {
+            Home home = new Home(rs);
+            ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+        }
+        else
+        {
+            HomeS home = new HomeS();
+            ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+        }
 
         //setting window visibility to true
         ihmWin.setVisible(true);
     }
 
-    /*public static void main(String[] args) {
-        IHMer win = new IHMer();
-    }*/
 }
