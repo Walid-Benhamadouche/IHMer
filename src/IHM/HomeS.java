@@ -94,7 +94,7 @@ public class HomeS extends MyPanel
 
         //adding squares field
         lessGBC.gridx=2;
-        lessGBC.gridy=0;
+        lessGBC.gridy=1;
         lessonsP.add(lessonsPC, lessGBC);
         lessGBC.weightx = 200;
         lessGBC.gridx=3;
@@ -125,7 +125,7 @@ public class HomeS extends MyPanel
 
         //adding squares field
         impGBC.gridx=2;
-        impGBC.gridy=0;
+        impGBC.gridy=1;
         importantP.add(importantPC, impGBC);
         impGBC.weightx = 200;
         impGBC.gridx=3;
@@ -156,7 +156,7 @@ public class HomeS extends MyPanel
 
         //adding squares field
         vidGBC.gridx=2;
-        vidGBC.gridy=0;
+        vidGBC.gridy=1;
         videosP.add(videosPC, vidGBC);
         vidGBC.weightx = 200;
         vidGBC.gridx=3;
