@@ -5,13 +5,12 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class dataField extends Label{
+class dataField extends Label{
 
-    public dataField (ResultSet rs) throws SQLException {
+    dataField(ResultSet rs) throws SQLException {
         ImageIcon lesson;
         lesson = new ImageIcon("file.png");
         this.setIcon(lesson);
@@ -22,9 +21,7 @@ public class dataField extends Label{
             {
                 try {
                     fileMouseClicked (rs);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
+                } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
             }
@@ -52,7 +49,7 @@ public class dataField extends Label{
 
     }
 
-    public void fileMouseClicked(ResultSet rs) throws SQLException, IOException {
+    private void fileMouseClicked(ResultSet rs) throws SQLException, IOException {
         JLabel l = new JLabel();
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
@@ -66,14 +63,24 @@ public class dataField extends Label{
             // set the label to the path of the selected file
             l.setText(j.getSelectedFile().getAbsolutePath());
         }
+
         //+rs.getString("name")
         File file = new File(l.getText());
         FileOutputStream output = new FileOutputStream(file);
-
-        while(rs.next())
+        System.out.println("file created");
+        rs.previous();
+        rs.previous();
+        if(rs.next())
         {
-            Blob blob = rs.getBlob("lesson");
-            InputStream input = blob.getBinaryStream();
+            InputStream input = rs.getBinaryStream("lesson");
+
+            byte[] buffer = new byte[1024];
+            while (input.read(buffer) > 0)
+            {
+                output.write(buffer);
+                System.out.println("writing . . .");
+            }
+            System.out.println("writing completed");
         }
     }
 }
