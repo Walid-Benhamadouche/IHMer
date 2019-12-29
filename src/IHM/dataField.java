@@ -2,6 +2,7 @@ package IHM;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
@@ -10,17 +11,22 @@ import java.sql.SQLException;
 
 class dataField extends Label{
 
-    dataField(ResultSet rs) throws SQLException {
+    dataField(ResultSet rs,String type) throws SQLException {
+        Color backColor = new Color(230, 145, 56);
         ImageIcon lesson;
         lesson = new ImageIcon("file.png");
         this.setIcon(lesson);
         this.setText(rs.getString("name"));
+        this.setForeground(backColor);
+        this.setHorizontalTextPosition(JLabel.CENTER);
+        this.setVerticalTextPosition(JLabel.BOTTOM);
+
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e)
             {
                 try {
-                    fileMouseClicked (rs);
+                    fileMouseClicked (rs,type);
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
                 }
@@ -49,7 +55,7 @@ class dataField extends Label{
 
     }
 
-    private void fileMouseClicked(ResultSet rs) throws SQLException, IOException {
+    private void fileMouseClicked(ResultSet rs,String type) throws SQLException, IOException {
         JLabel l = new JLabel();
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
@@ -72,7 +78,7 @@ class dataField extends Label{
         rs.previous();
         if(rs.next())
         {
-            InputStream input = rs.getBinaryStream("lesson");
+            InputStream input = rs.getBinaryStream(type);
 
             byte[] buffer = new byte[1024];
             while (input.read(buffer) > 0)
@@ -81,6 +87,7 @@ class dataField extends Label{
                 System.out.println("writing . . .");
             }
             System.out.println("writing completed");
+            output.close();
         }
     }
 }

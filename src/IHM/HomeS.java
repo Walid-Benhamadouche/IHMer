@@ -1,5 +1,7 @@
 package IHM;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.*;
 
 public class HomeS extends MyPanel
@@ -9,34 +11,36 @@ public class HomeS extends MyPanel
     private Color backColor = new Color(230, 145, 56);
 
     private Label lessonsL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
     private Label importantL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Important");
-    private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All          ");
     private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
-    private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
 
     private MyPanel lessonsP = new MyPanel(Dracula);
-    private MyPanel lessonsPC = new MyPanel(Color.gray);
+    private MyPanel lessonsPC = new MyPanel(Dracula);
     private MyPanel importantP = new MyPanel(Dracula);
-    private MyPanel importantPC = new MyPanel(Color.gray);
+    private MyPanel importantPC = new MyPanel(Dracula);
     private MyPanel videosP = new MyPanel(Dracula);
-    private MyPanel videosPC = new MyPanel(Color.gray);
+    private MyPanel videosPC = new MyPanel(Dracula);
     private MyPanel quoteP = new MyPanel(Dracula);
-    private MyPanel postP = new MyPanel(Color.red);
-    private MyPanel empty1 = new MyPanel(Color.GREEN);
-    private MyPanel empty2 = new MyPanel(Color.GREEN);
-    private MyPanel empty3 = new MyPanel(Color.GREEN);
-    private MyPanel empty4 = new MyPanel(Color.GREEN);
-    private MyPanel empty5 = new MyPanel(Color.GREEN);
-    private MyPanel empty6 = new MyPanel(Color.GREEN);
+    private MyPanel postP = new MyPanel(Dracula);
+    private MyPanel empty1 = new MyPanel(Dracula);
+    private MyPanel empty2 = new MyPanel(Dracula);
+    private MyPanel empty3 = new MyPanel(Dracula);
+    private MyPanel empty4 = new MyPanel(Dracula);
+    private MyPanel empty5 = new MyPanel(Dracula);
+    private MyPanel empty6 = new MyPanel(Dracula);
 
     //jTextPane
-    private TextField postTF = new TextField(400, 100, new Color(255, 229, 153), new Color(49, 53, 57));
+    private TextArea postTF = new TextArea(700, 100, new Color(255, 229, 153), new Color(49, 53, 57));
 
-    private Button postB = new Button(80, 30, backColor, Dracula, "Post question");
+    private Button postB = new Button(120, 30, backColor, Dracula, "Post question");
 
-    public HomeS() throws SQLException, ClassNotFoundException {
+    public HomeS(ResultSet rsu) throws SQLException, ClassNotFoundException {
         //postP
+        postP.add(postTF);
+        postP.add(postB);
 
         //lessonPC
         lessonsPC.setLayout(new GridLayout());
@@ -46,7 +50,7 @@ public class HomeS extends MyPanel
         ResultSet rsl = psl.executeQuery();
         for(int i=0; rsl.next() && i<4; i++)
         {
-            lessonsPC.add(new dataField(rsl));
+            lessonsPC.add(new dataField(rsl,"lesson"));
         }
 
         //newsPC
@@ -56,17 +60,17 @@ public class HomeS extends MyPanel
         ResultSet rsn = psn.executeQuery();
         for(int i=0; rsn.next() && i<4; i++)
         {
-            importantPC.add(new dataField(rsn));
+            importantPC.add(new dataField(rsn,"news"));
         }
 
         //videoPC
         videosPC.setLayout(new GridLayout());
-        String queryV = "select * from news";
+        String queryV = "select * from video";
         PreparedStatement psv = con.prepareStatement(queryV);
         ResultSet rsv = psv.executeQuery();
         for(int i=0; rsv.next() && i<4; i++)
         {
-            importantPC.add(new dataField(rsv));
+            videosPC.add(new dataField(rsv,"video"));
         }
 
         //lessonsP
@@ -172,6 +176,56 @@ public class HomeS extends MyPanel
         this.add(videosP);
         this.add(quoteP);
 
+        postB.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    postBMouseListener(rsu);
+                } catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+    }
+
+    private void postBMouseListener(ResultSet rsu) throws SQLException, ClassNotFoundException {
+        String queryS = "SELECT ids FROM student WHERE idus = ?";
+        String queryI = "insert into question (ids, question)"+"VALUES (?,?)";
+
+        Connection con = dbConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement(queryS, Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, rsu.getInt("idus"));
+
+        ResultSet rsS= ps.executeQuery();
+        rsS.next();
+
+        PreparedStatement ps1 = con.prepareStatement(queryI);
+
+        ps1.setInt(1, rsS.getInt("ids"));
+        ps1.setString(2, postTF.getText());
+        ps1.execute();
+        postTF.setText("");
     }
 
 }

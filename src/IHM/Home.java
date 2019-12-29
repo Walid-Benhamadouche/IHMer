@@ -14,37 +14,32 @@ public class Home extends MyPanel {
     private Color backColor = new Color(230, 145, 56);
 
     private Label lessonsL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
     private Label importantL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Important");
-    private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All          ");
     private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
-    private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All");
+    private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
     private Label addLesson = new Label();
     private Label addNews = new Label();
     private Label addVideo = new Label();
 
     private MyPanel lessonsP = new MyPanel(Dracula);
-    private MyPanel lessonsPC = new MyPanel(Color.gray);
+    private MyPanel lessonsPC = new MyPanel(Dracula);
     private MyPanel importantP = new MyPanel(Dracula);
-    private MyPanel importantPC = new MyPanel(Color.gray);
+    private MyPanel importantPC = new MyPanel(Dracula);
     private MyPanel videosP = new MyPanel(Dracula);
-    private MyPanel videosPC = new MyPanel(Color.gray);
+    private MyPanel videosPC = new MyPanel(Dracula);
     private MyPanel quoteP = new MyPanel(Dracula);
-    private MyPanel postP = new MyPanel(Color.red);
-    private MyPanel empty1 = new MyPanel(Color.GREEN);
-    private MyPanel empty2 = new MyPanel(Color.GREEN);
-    private MyPanel empty3 = new MyPanel(Color.GREEN);
-    private MyPanel empty4 = new MyPanel(Color.GREEN);
-    private MyPanel empty5 = new MyPanel(Color.GREEN);
-    private MyPanel empty6 = new MyPanel(Color.GREEN);
+    private MyPanel empty1 = new MyPanel(Dracula);
+    private MyPanel empty2 = new MyPanel(Dracula);
+    private MyPanel empty3 = new MyPanel(Dracula);
+    private MyPanel empty4 = new MyPanel(Dracula);
+    private MyPanel empty5 = new MyPanel(Dracula);
+    private MyPanel empty6 = new MyPanel(Dracula);
 
     private ImageIcon addIcon;
 
-    //jTextPane
-    //private TextField post = new TextField(400, 100, new Color(255, 229, 153), new Color(49, 53, 57));
-
     public Home(ResultSet rsu) throws SQLException, ClassNotFoundException {
-        //postP
 
         //lessonPC
         lessonsPC.setLayout(new GridLayout());
@@ -54,7 +49,7 @@ public class Home extends MyPanel {
         ResultSet rs = ps.executeQuery();
         for(int i=0; rs.next() && i<4; i++)
         {
-           lessonsPC.add(new dataField(rs));
+           lessonsPC.add(new dataField(rs,"lesson"));
         }
 
         //add a lesson function
@@ -69,7 +64,7 @@ public class Home extends MyPanel {
         ResultSet rsn = psn.executeQuery();
         for(int i=0; rsn.next() && i<4; i++)
         {
-            importantPC.add(new dataField(rsn));
+            importantPC.add(new dataField(rsn,"news"));
         }
 
         //add a news function
@@ -79,12 +74,12 @@ public class Home extends MyPanel {
 
         //videoPC
         videosPC.setLayout(new GridLayout());
-        String queryV = "select * from news";
+        String queryV = "select * from video";
         PreparedStatement psv = con.prepareStatement(queryV);
         ResultSet rsv = psv.executeQuery();
         for(int i=0; rsv.next() && i<4; i++)
         {
-            importantPC.add(new dataField(rsv));
+            videosPC.add(new dataField(rsv,"video"));
         }
 
         //add a video function
@@ -189,7 +184,6 @@ public class Home extends MyPanel {
 
 
         this.setLayout(new GridLayout(0,1));
-        //this.add(postP);
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
@@ -226,9 +220,83 @@ public class Home extends MyPanel {
 
             }
         });
+
+        addNews.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    addNewsMouseClicked(rsu);
+                } catch (FileNotFoundException | ClassNotFoundException | SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        addVideo.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    addVideoMouseClicked(rsu);
+                } catch (FileNotFoundException | SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
     private void addLessonMouseClicked(ResultSet rsu) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        this.add(rsu,"lesson");
+    }
+
+    private void addNewsMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
+        this.add(rsu,"news");
+    }
+
+    private void addVideoMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
+        this.add(rsu,"video");
+    }
+
+    private void add(ResultSet rsu,String type) throws FileNotFoundException, SQLException, ClassNotFoundException {
 
         JLabel l = new JLabel();
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -249,7 +317,7 @@ public class Home extends MyPanel {
         JOptionPane.showMessageDialog( null, l.getText());
 
         String queryS = "SELECT idt FROM teacher WHERE idus = ?";
-        String queryI = "insert into lesson (idt, lesson, name)"+"VALUES (?,?,?)";
+        String queryI = "insert into "+type+" (idt, "+type+", name)"+"VALUES (?,?,?)";
 
         JOptionPane.showMessageDialog( null, rsu.getInt("idus"));
 

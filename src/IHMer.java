@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IHMer {
+class IHMer {
     //declaration
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -35,7 +35,7 @@ public class IHMer {
     private ImageIcon profile;
 
 
-    public IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
+    IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -98,7 +98,7 @@ public class IHMer {
         }
         else
         {
-            HomeS home = new HomeS();
+            HomeS home = new HomeS(rs);
             ihmWin.getContentPane().add(home, BorderLayout.CENTER);
         }
 

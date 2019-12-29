@@ -274,7 +274,6 @@ public class LogIn {
         try {
             String email = E_mailF.getText();
             String password = String.valueOf(PasswordF.getPassword());
-            int idus = 0;
 
             String query = "select * from user where `email` = ? and `password`=?";
 
