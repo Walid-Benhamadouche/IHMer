@@ -1,24 +1,23 @@
 import IHM.*;
 import IHM.Label;
-import IHM.TextField;
-import com.mysql.cj.xdevapi.Result;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IHMer {
+class IHMer {
     //declaration
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     private Form ihmWin = new Form(screenSize.width, screenSize.height, "IHMer");
 
     private Color Dracula = new Color(45, 52, 54);
-    private Color backColor = new Color(230, 145, 56);
     private Color topBar = new Color(238, 186, 43);
 
     private Label logoL = new Label();
@@ -30,8 +29,6 @@ public class IHMer {
     private MyPanel loadingScreen = new MyPanel(Dracula);
     private MyPanel topMenuBar = new MyPanel(screenSize.width, 50, topBar);
 
-    private TextField searchBar = new TextField(240, 30, backColor, Color.gray);
-
     private Image logInIcon;
     private ImageIcon logo;
     private ImageIcon sideMenu;
@@ -39,9 +36,10 @@ public class IHMer {
     private ImageIcon questions;
     private ImageIcon profile;
 
-    private Home home = new Home();
+    private boolean test;
 
-    public IHMer(ResultSet rs) throws SQLException {
+    IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
+
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -55,13 +53,13 @@ public class IHMer {
         //images
         logo = new ImageIcon("IHMer.png");
         logoL.setIcon(logo);
-        sideMenu = new ImageIcon("IHMerMini.png");
+        sideMenu = new ImageIcon("hum.png");
         sideMenuL.setIcon(sideMenu);
         homeI = new ImageIcon("IHMerMini.png");
         homeL.setIcon(homeI);
-        questions = new ImageIcon("IHMerMini.png");
+        questions = new ImageIcon("Qq.png");
         questionsL.setIcon(questions);
-        profile = new ImageIcon("IHMerMini.png");
+        profile = new ImageIcon("user.png");
         profileL.setIcon(profile);
 
         //loading screen panel show
@@ -97,13 +95,56 @@ public class IHMer {
 
         //setting up panels after loading
         ihmWin.getContentPane().add(topMenuBar, BorderLayout.NORTH);
-        ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+        test = rs.getString("profile").equals("teacher");
+        Home homet = new Home(rs);
+        HomeS homes = new HomeS(rs);
+        if(test)
+        {
+            ihmWin.getContentPane().add(homet, BorderLayout.CENTER);
+        }
+        else
+        {
+
+            ihmWin.getContentPane().add(homes, BorderLayout.CENTER);
+        }
 
         //setting window visibility to true
         ihmWin.setVisible(true);
+
+        homeL.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                homeLMouseClicked(homet, homes);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
-    /*public static void main(String[] args) {
-        IHMer win = new IHMer();
-    }*/
+    private void homeLMouseClicked(Home homet,HomeS homes)
+    {
+        if (test)
+            homet.reShow();
+        else
+            homes.reShow();
+    }
+
 }

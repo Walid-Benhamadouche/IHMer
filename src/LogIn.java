@@ -184,7 +184,7 @@ public class LogIn {
         Sign_up.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                SignUnMouseClicked();
             }
 
             @Override
@@ -275,11 +275,11 @@ public class LogIn {
             String email = E_mailF.getText();
             String password = String.valueOf(PasswordF.getPassword());
 
-            String query = "select email, password from user where `email` = ? and `password`=?";
+            String query = "select * from user where `email` = ? and `password`=?";
 
             Connection con = dbConnection.getConnection();
 
-            PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -290,7 +290,7 @@ public class LogIn {
             logIn.dispose();
             }catch (SQLException | ClassNotFoundException e)
                     {
-                        JOptionPane.showMessageDialog( null, "email or password wrong");
+                        JOptionPane.showMessageDialog( null, e.getMessage());
                     }
     }
 
@@ -324,6 +324,12 @@ public class LogIn {
 
     private void rememberMeFocusLost() {
         RememberMe.setForeground(Color.gray);
+    }
+
+    private void SignUnMouseClicked()
+    {
+        SignUp signUp= new SignUp();
+        logIn.dispose();
     }
 
     public static void main(String[] args) {

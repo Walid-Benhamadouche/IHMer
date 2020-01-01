@@ -1,27 +1,22 @@
 package IHM;
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.*;
 import java.sql.*;
 
-public class Home extends MyPanel {
-
+public class HomeS extends MyPanel
+{
     //declarations
     private Color Dracula = new Color(45, 52, 54);
     private Color backColor = new Color(230, 145, 56);
 
     private Label lessonsL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All        ");
+    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
     private Label importantL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Important");
     private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All          ");
     private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
     private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
-    private Label addLesson = new Label();
-    private Label addNews = new Label();
-    private Label addVideo = new Label();
 
     private MyPanel lessonsP = new MyPanel(Dracula);
     private MyPanel lessonsPC = new MyPanel(Dracula);
@@ -30,6 +25,7 @@ public class Home extends MyPanel {
     private MyPanel videosP = new MyPanel(Dracula);
     private MyPanel videosPC = new MyPanel(Dracula);
     private MyPanel quoteP = new MyPanel(Dracula);
+    private MyPanel postP = new MyPanel(Dracula);
     private MyPanel empty1 = new MyPanel(Dracula);
     private MyPanel empty2 = new MyPanel(Dracula);
     private MyPanel empty3 = new MyPanel(Dracula);
@@ -45,9 +41,13 @@ public class Home extends MyPanel {
     private JScrollPane importantJP = new JScrollPane();
     private JScrollPane videoJP = new JScrollPane();
 
-    private ImageIcon addIcon;
 
-    public Home(ResultSet rsu) throws SQLException, ClassNotFoundException {
+    //jTextPane
+    private TextArea postTF = new TextArea(700, 100, new Color(255, 229, 153), new Color(49, 53, 57));
+
+    private Button postB = new Button(120, 30, backColor, Dracula, "Post question");
+
+    public HomeS(ResultSet rsu) throws SQLException, ClassNotFoundException {
 
         lessonJP.setViewportView(lessonsSA);
         importantJP.setViewportView(importantSA);
@@ -57,25 +57,20 @@ public class Home extends MyPanel {
         importantJP.setBackground(Dracula);
         videoJP.setBackground(Dracula);
 
+        //postP
+        postP.add(postTF);
+        postP.add(postB);
+
         //lessonPC
         lessonsPC.setLayout(new GridLayout());
-        String query = "select * from lesson";
+        String queryL = "select * from lesson";
         Connection con = dbConnection.getConnection() ;
-        PreparedStatement ps = con.prepareStatement(query);
-        ResultSet rs = ps.executeQuery();
-        for(int i=0; rs.next() && i<4; i++)
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        for(int i=0; rsl.next() && i<4; i++)
         {
-           lessonsPC.add(new dataField(rs,"lesson"));
+            lessonsPC.add(new dataField(rsl,"lesson"));
         }
-
-        //add a lesson function
-        addIcon = new ImageIcon("icons8-add-file-400.png");
-        addLesson.setIcon(addIcon);
-        addLesson.setText("Add a lesson");
-        addLesson.setForeground(backColor);
-        addLesson.setHorizontalTextPosition(JLabel.CENTER);
-        addLesson.setVerticalTextPosition(JLabel.BOTTOM);
-        lessonsPC.add(addLesson);
 
         //newsPC
         importantPC.setLayout(new GridLayout());
@@ -87,15 +82,6 @@ public class Home extends MyPanel {
             importantPC.add(new dataField(rsn,"news"));
         }
 
-        //add a news function
-        addIcon = new ImageIcon("icons8-add-image-100.png");
-        addNews.setIcon(addIcon);
-        addNews.setText("Add news");
-        addNews.setForeground(backColor);
-        addNews.setHorizontalTextPosition(JLabel.CENTER);
-        addNews.setVerticalTextPosition(JLabel.BOTTOM);
-        importantPC.add(addNews);
-
         //videoPC
         videosPC.setLayout(new GridLayout());
         String queryV = "select * from video";
@@ -105,15 +91,6 @@ public class Home extends MyPanel {
         {
             videosPC.add(new dataField(rsv,"video"));
         }
-
-        //add a video function
-        //addIcon = new ImageIcon("IHMer.png");
-        addVideo.setIcon(addIcon);
-        addVideo.setText("Add video");
-        addVideo.setForeground(backColor);
-        addVideo.setHorizontalTextPosition(JLabel.CENTER);
-        addVideo.setVerticalTextPosition(JLabel.BOTTOM);
-        videosPC.add(addVideo);
 
         //lessonsP
         empty1.setPreferredSize(new Dimension(10,20));
@@ -212,80 +189,18 @@ public class Home extends MyPanel {
 
 
         this.setLayout(new GridLayout(0,1));
+        this.add(postP);
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
         //this.add(quoteP);
 
-        addLesson.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                try {
-                    addLessonMouseClicked(rsu);
-                } catch (SQLException | ClassNotFoundException | FileNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-
-        addNews.addMouseListener(new MouseListener() {
+        postB.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    addNewsMouseClicked(rsu);
-                } catch (FileNotFoundException | ClassNotFoundException | SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-
-        addVideo.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    addVideoMouseClicked(rsu);
-                } catch (FileNotFoundException | SQLException | ClassNotFoundException ex) {
+                    postBMouseListener(rsu);
+                } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
             }
@@ -391,65 +306,26 @@ public class Home extends MyPanel {
 
             }
         });
+
     }
 
-    private void addLessonMouseClicked(ResultSet rsu) throws SQLException, ClassNotFoundException, FileNotFoundException {
-        this.add(rsu,"lesson");
-    }
-
-    private void addNewsMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
-        this.add(rsu,"news");
-    }
-
-    private void addVideoMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
-        this.add(rsu,"video");
-    }
-
-    private void add(ResultSet rsu,String type) throws FileNotFoundException, SQLException, ClassNotFoundException {
-
-        JLabel l = new JLabel();
-        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-        // invoke the showsOpenDialog function to show the save dialog
-        int r = j.showOpenDialog(null);
-
-        // if the user selects a file
-        if (r == JFileChooser.APPROVE_OPTION)
-
-        {
-            // set the label to the path of the selected file
-            l.setText(j.getSelectedFile().getAbsolutePath());
-        }
-
-        File file = new File(l.getText());
-        FileInputStream input = new FileInputStream(file);
-        JOptionPane.showMessageDialog( null, l.getText());
-
-        String queryS = "SELECT idt FROM teacher WHERE idus = ?";
-        String queryI = "insert into "+type+" (idt, "+type+", name)"+"VALUES (?,?,?)";
-
-//        JOptionPane.showMessageDialog( null, rsu.getInt("idus"));
+    private void postBMouseListener(ResultSet rsu) throws SQLException, ClassNotFoundException {
+        String queryS = "SELECT ids FROM student WHERE idus = ?";
+        String queryI = "insert into question (ids, question)"+"VALUES (?,?)";
 
         Connection con = dbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(queryS, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, rsu.getInt("idus"));
-        JOptionPane.showMessageDialog( null, "connection established and statement created");
 
-
-        JOptionPane.showMessageDialog( null, "statement ready");
-        System.out.print(ps);
         ResultSet rsS= ps.executeQuery();
         rsS.next();
-        JOptionPane.showMessageDialog( null, "executed");
 
         PreparedStatement ps1 = con.prepareStatement(queryI);
 
-        JOptionPane.showMessageDialog( null, rsS.getInt("idt"));
-        ps1.setInt(1, rsS.getInt("idt"));
-        ps1.setBlob(2, input);
-        ps1.setString(3, file.getName());
+        ps1.setInt(1, rsS.getInt("ids"));
+        ps1.setString(2, postTF.getText());
         ps1.execute();
-        this.repaint();
+        postTF.setText("");
     }
 
     private void videosSeeAllMouseClicked()
@@ -473,14 +349,14 @@ public class Home extends MyPanel {
         this.repaint();
     }
 
-
     public void reShow()
     {
         this.removeAll();
+        this.add(postP);
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
-        this.add(quoteP);
+        //this.add(quoteP);
         this.repaint();
     }
 
