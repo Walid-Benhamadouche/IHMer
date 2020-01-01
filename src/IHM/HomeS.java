@@ -1,4 +1,5 @@
 package IHM;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,12 +33,30 @@ public class HomeS extends MyPanel
     private MyPanel empty5 = new MyPanel(Dracula);
     private MyPanel empty6 = new MyPanel(Dracula);
 
+    private SeeAll lessonsSA = new SeeAll("lesson");
+    private SeeAll importantSA = new SeeAll("news");
+    private SeeAll videosSA = new SeeAll("video");
+
+    private JScrollPane lessonJP = new JScrollPane();
+    private JScrollPane importantJP = new JScrollPane();
+    private JScrollPane videoJP = new JScrollPane();
+
+
     //jTextPane
     private TextArea postTF = new TextArea(700, 100, new Color(255, 229, 153), new Color(49, 53, 57));
 
     private Button postB = new Button(120, 30, backColor, Dracula, "Post question");
 
     public HomeS(ResultSet rsu) throws SQLException, ClassNotFoundException {
+
+        lessonJP.setViewportView(lessonsSA);
+        importantJP.setViewportView(importantSA);
+        videoJP.setViewportView(videosSA);
+
+        lessonJP.setBackground(Dracula);
+        importantJP.setBackground(Dracula);
+        videoJP.setBackground(Dracula);
+
         //postP
         postP.add(postTF);
         postP.add(postB);
@@ -174,7 +193,7 @@ public class HomeS extends MyPanel
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
-        this.add(quoteP);
+        //this.add(quoteP);
 
         postB.addMouseListener(new MouseListener() {
             @Override
@@ -184,6 +203,87 @@ public class HomeS extends MyPanel
                 } catch (SQLException | ClassNotFoundException ex) {
                     ex.printStackTrace();
                 }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        lessonsSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lessonsSeeAllMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        importantSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                importantSeeAllMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        videosSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                videosSeeAllMouseClicked();
             }
 
             @Override
@@ -226,6 +326,38 @@ public class HomeS extends MyPanel
         ps1.setString(2, postTF.getText());
         ps1.execute();
         postTF.setText("");
+    }
+
+    private void videosSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(videoJP);
+        this.repaint();
+    }
+
+    private void importantSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(importantJP);
+        this.repaint();
+    }
+
+    private void lessonsSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(lessonJP);
+        this.repaint();
+    }
+
+    public void reShow()
+    {
+        this.removeAll();
+        this.add(postP);
+        this.add(lessonsP);
+        this.add(importantP);
+        this.add(videosP);
+        //this.add(quoteP);
+        this.repaint();
     }
 
 }

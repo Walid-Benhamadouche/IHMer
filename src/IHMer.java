@@ -4,6 +4,8 @@ import IHM.Label;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -34,8 +36,10 @@ class IHMer {
     private ImageIcon questions;
     private ImageIcon profile;
 
+    private boolean test;
 
     IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
+
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
@@ -49,13 +53,13 @@ class IHMer {
         //images
         logo = new ImageIcon("IHMer.png");
         logoL.setIcon(logo);
-        sideMenu = new ImageIcon("IHMerMini.png");
+        sideMenu = new ImageIcon("hum.png");
         sideMenuL.setIcon(sideMenu);
         homeI = new ImageIcon("IHMerMini.png");
         homeL.setIcon(homeI);
-        questions = new ImageIcon("IHMerMini.png");
+        questions = new ImageIcon("Qq.png");
         questionsL.setIcon(questions);
-        profile = new ImageIcon("IHMerMini.png");
+        profile = new ImageIcon("user.png");
         profileL.setIcon(profile);
 
         //loading screen panel show
@@ -91,19 +95,56 @@ class IHMer {
 
         //setting up panels after loading
         ihmWin.getContentPane().add(topMenuBar, BorderLayout.NORTH);
-        if(rs.getString("profile").equals("teacher"))
+        test = rs.getString("profile").equals("teacher");
+        Home homet = new Home(rs);
+        HomeS homes = new HomeS(rs);
+        if(test)
         {
-            Home home = new Home(rs);
-            ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+            ihmWin.getContentPane().add(homet, BorderLayout.CENTER);
         }
         else
         {
-            HomeS home = new HomeS(rs);
-            ihmWin.getContentPane().add(home, BorderLayout.CENTER);
+
+            ihmWin.getContentPane().add(homes, BorderLayout.CENTER);
         }
 
         //setting window visibility to true
         ihmWin.setVisible(true);
+
+        homeL.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                homeLMouseClicked(homet, homes);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    private void homeLMouseClicked(Home homet,HomeS homes)
+    {
+        if (test)
+            homet.reShow();
+        else
+            homes.reShow();
     }
 
 }

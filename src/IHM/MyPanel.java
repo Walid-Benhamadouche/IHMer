@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MyPanel extends JPanel{
 
-    public MyPanel(){}
+    MyPanel(){ this.setBackground(new Color(45, 52, 54)); }
 
     public MyPanel(Color color)
     {

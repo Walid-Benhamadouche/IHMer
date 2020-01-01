@@ -14,7 +14,7 @@ public class Home extends MyPanel {
     private Color backColor = new Color(230, 145, 56);
 
     private Label lessonsL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
+    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All        ");
     private Label importantL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Important");
     private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All          ");
     private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
@@ -37,9 +37,25 @@ public class Home extends MyPanel {
     private MyPanel empty5 = new MyPanel(Dracula);
     private MyPanel empty6 = new MyPanel(Dracula);
 
+    private SeeAll lessonsSA = new SeeAll("lesson");
+    private SeeAll importantSA = new SeeAll("news");
+    private SeeAll videosSA = new SeeAll("video");
+
+    private JScrollPane lessonJP = new JScrollPane();
+    private JScrollPane importantJP = new JScrollPane();
+    private JScrollPane videoJP = new JScrollPane();
+
     private ImageIcon addIcon;
 
     public Home(ResultSet rsu) throws SQLException, ClassNotFoundException {
+
+        lessonJP.setViewportView(lessonsSA);
+        importantJP.setViewportView(importantSA);
+        videoJP.setViewportView(videosSA);
+
+        lessonJP.setBackground(Dracula);
+        importantJP.setBackground(Dracula);
+        videoJP.setBackground(Dracula);
 
         //lessonPC
         lessonsPC.setLayout(new GridLayout());
@@ -53,8 +69,12 @@ public class Home extends MyPanel {
         }
 
         //add a lesson function
-        addIcon = new ImageIcon("IHMer.png");
+        addIcon = new ImageIcon("icons8-add-file-400.png");
         addLesson.setIcon(addIcon);
+        addLesson.setText("Add a lesson");
+        addLesson.setForeground(backColor);
+        addLesson.setHorizontalTextPosition(JLabel.CENTER);
+        addLesson.setVerticalTextPosition(JLabel.BOTTOM);
         lessonsPC.add(addLesson);
 
         //newsPC
@@ -68,8 +88,12 @@ public class Home extends MyPanel {
         }
 
         //add a news function
-        addIcon = new ImageIcon("IHMer.png");
+        addIcon = new ImageIcon("icons8-add-image-100.png");
         addNews.setIcon(addIcon);
+        addNews.setText("Add news");
+        addNews.setForeground(backColor);
+        addNews.setHorizontalTextPosition(JLabel.CENTER);
+        addNews.setVerticalTextPosition(JLabel.BOTTOM);
         importantPC.add(addNews);
 
         //videoPC
@@ -83,8 +107,12 @@ public class Home extends MyPanel {
         }
 
         //add a video function
-        addIcon = new ImageIcon("IHMer.png");
+        //addIcon = new ImageIcon("IHMer.png");
         addVideo.setIcon(addIcon);
+        addVideo.setText("Add video");
+        addVideo.setForeground(backColor);
+        addVideo.setHorizontalTextPosition(JLabel.CENTER);
+        addVideo.setVerticalTextPosition(JLabel.BOTTOM);
         videosPC.add(addVideo);
 
         //lessonsP
@@ -187,7 +215,7 @@ public class Home extends MyPanel {
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
-        this.add(quoteP);
+        //this.add(quoteP);
 
         addLesson.addMouseListener(new MouseListener() {
             @Override
@@ -282,6 +310,87 @@ public class Home extends MyPanel {
 
             }
         });
+
+        lessonsSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lessonsSeeAllMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        importantSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                importantSeeAllMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        videosSeeAll.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                videosSeeAllMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
     private void addLessonMouseClicked(ResultSet rsu) throws SQLException, ClassNotFoundException, FileNotFoundException {
@@ -319,7 +428,7 @@ public class Home extends MyPanel {
         String queryS = "SELECT idt FROM teacher WHERE idus = ?";
         String queryI = "insert into "+type+" (idt, "+type+", name)"+"VALUES (?,?,?)";
 
-        JOptionPane.showMessageDialog( null, rsu.getInt("idus"));
+//        JOptionPane.showMessageDialog( null, rsu.getInt("idus"));
 
         Connection con = dbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(queryS, Statement.RETURN_GENERATED_KEYS);
@@ -340,7 +449,39 @@ public class Home extends MyPanel {
         ps1.setBlob(2, input);
         ps1.setString(3, file.getName());
         ps1.execute();
+        this.repaint();
+    }
 
+    private void videosSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(videoJP);
+        this.repaint();
+    }
+
+    private void importantSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(importantJP);
+        this.repaint();
+    }
+
+    private void lessonsSeeAllMouseClicked()
+    {
+        this.removeAll();
+        this.add(lessonJP);
+        this.repaint();
+    }
+
+
+    public void reShow()
+    {
+        this.removeAll();
+        this.add(lessonsP);
+        this.add(importantP);
+        this.add(videosP);
+        this.add(quoteP);
+        this.repaint();
     }
 
 }

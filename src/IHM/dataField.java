@@ -14,7 +14,20 @@ class dataField extends Label{
     dataField(ResultSet rs,String type) throws SQLException {
         Color backColor = new Color(230, 145, 56);
         ImageIcon lesson;
-        lesson = new ImageIcon("file.png");
+        switch (type) {
+            case "lesson":
+                lesson = new ImageIcon("icons8-pdf-100.png");
+                break;
+            case "news":
+                lesson = new ImageIcon("icons8-image-100.png");
+                break;
+            case "video":
+                lesson = new ImageIcon("icons8-video-file-100.png");
+                break;
+            default:
+                lesson = new ImageIcon("icons8-edit-file-400.png");
+                break;
+        }
         this.setIcon(lesson);
         this.setText(rs.getString("name"));
         this.setForeground(backColor);
