@@ -13,12 +13,12 @@ public class Home extends MyPanel {
     private Color Dracula = new Color(45, 52, 54);
     private Color backColor = new Color(230, 145, 56);
 
-    private Label lessonsL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All        ");
-    private Label importantL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Important");
-    private Label importantSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All          ");
-    private Label videosL = new Label("Tahoma", Font.PLAIN, 14, backColor, "Videos");
-    private Label videosSeeAll = new Label("Tahoma", Font.PLAIN, 14, backColor, "See All           ");
+    private Label lessonsL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Lessons");
+    private Label lessonsSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All        ");
+    private Label importantL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Important");
+    private Label importantSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All          ");
+    private Label videosL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Videos");
+    private Label videosSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All           ");
     private Label addLesson = new Label();
     private Label addNews = new Label();
     private Label addVideo = new Label();
@@ -72,6 +72,7 @@ public class Home extends MyPanel {
         addIcon = new ImageIcon("icons8-add-file-400.png");
         addLesson.setIcon(addIcon);
         addLesson.setText("Add a lesson");
+        addLesson.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
         addLesson.setForeground(backColor);
         addLesson.setHorizontalTextPosition(JLabel.CENTER);
         addLesson.setVerticalTextPosition(JLabel.BOTTOM);
@@ -91,6 +92,7 @@ public class Home extends MyPanel {
         addIcon = new ImageIcon("icons8-add-image-100.png");
         addNews.setIcon(addIcon);
         addNews.setText("Add news");
+        addNews.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
         addNews.setForeground(backColor);
         addNews.setHorizontalTextPosition(JLabel.CENTER);
         addNews.setVerticalTextPosition(JLabel.BOTTOM);
@@ -110,6 +112,7 @@ public class Home extends MyPanel {
         //addIcon = new ImageIcon("IHMer.png");
         addVideo.setIcon(addIcon);
         addVideo.setText("Add video");
+        addVideo.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
         addVideo.setForeground(backColor);
         addVideo.setHorizontalTextPosition(JLabel.CENTER);
         addVideo.setVerticalTextPosition(JLabel.BOTTOM);

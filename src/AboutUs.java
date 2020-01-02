@@ -1,12 +1,14 @@
 import IHM.Form;
 import IHM.Label;
 import IHM.MyPanel;
-
+import IHM.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
+import static java.awt.Color.white;
 
 public class AboutUs {
     //declarations
@@ -14,8 +16,8 @@ public class AboutUs {
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
     private IHM.Label logoL = new IHM.Label();
-    private IHM.Label titleText = new IHM.Label("Times New Roman", Font.PLAIN, 15, Orange, "IHMer Blog");
-    private IHM.Label texte = new Label("Times New Roman", Font.PLAIN, 15, Orange,"");
+    private IHM.Label titleText = new IHM.Label("Comic Sans MS", Font.PLAIN, 21, Orange, "IHMer Blog");
+    private IHM.Label texte = new Label("Comic Sans MS", Font.PLAIN, 17, white,"");
     private MyPanel topPanel = new MyPanel(300, 300, Dracula);
     private MyPanel downPanel = new MyPanel(200, 100, Dracula);
     private ImageIcon logo;

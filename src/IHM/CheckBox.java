@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class CheckBox extends JCheckBox {
 
-    private Font defaultFont = new Font("Tahoma", Font.PLAIN, 12);
+    private Font defaultFont = new Font("Comic Sans MS", Font.PLAIN, 12);
     public CheckBox(Color backGround, Color foreGround, String text)
     {
         this.setBackground(backGround);

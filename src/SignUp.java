@@ -22,14 +22,14 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
 
-    private Label joinUsText = new Label("Times New Roman", Font.PLAIN, 25, Orange, "   Join us");
+    private Label joinUsText = new Label("Comic Sans MS", Font.PLAIN, 25, Orange, "   Join us");
     private Label logoL = new Label();
-    private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "E-mail   ");
-    private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Password   ");
-    private Label userNameL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "User Name   ");
-    private Label confirmL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Confirm   ");
-    private Label userProfileL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "User Profile   ");
-    private Label alreadyMember = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "       Already a member ?");
+    private Label E_mailL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "E-mail   ");
+    private Label PasswordL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Password   ");
+    private Label userNameL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "User Name   ");
+    private Label confirmL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Confirm   ");
+    private Label userProfileL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "User Profile   ");
+    private Label alreadyMember = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "       Already a member ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -42,6 +42,7 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private PasswordField PasswordF = new PasswordField(240, 30, Dracula, Color.gray);
     private TextField userNameF = new TextField(240, 30, Dracula, Color.gray);
     private PasswordField confirmF = new PasswordField(240, 30, Dracula, Color.gray);
+
     private MyPanel topPanel = new MyPanel(800, 150, Dracula);
     private MyPanel mainPanel = new MyPanel(800, 200, Dracula);
     private MyPanel botPanel = new MyPanel(800, 60, Dracula);
