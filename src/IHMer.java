@@ -2,12 +2,14 @@ import IHM.*;
 import IHM.Label;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -35,6 +37,8 @@ class IHMer {
     private ImageIcon homeI;
     private ImageIcon questions;
     private ImageIcon profile;
+
+    private JScrollPane jp;
 
     private boolean test;
 
@@ -64,7 +68,6 @@ class IHMer {
 
         //loading screen panel show
         //details
-        //TODO
         loadingScreen.add(logoL);
         ihmWin.getContentPane().add(loadingScreen, BorderLayout.CENTER);
 
@@ -137,14 +140,77 @@ class IHMer {
 
             }
         });
+
+        questionsL.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    questionsLMouseClicked(homet, homes);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
     }
 
-    private void homeLMouseClicked(Home homet,HomeS homes)
-    {
-        if (test)
+    private void homeLMouseClicked(Home homet,HomeS homes) {
+        ihmWin.remove(jp);
+        if (test) {
             homet.reShow();
-        else
+            ihmWin.add(homet);
+        } else {
             homes.reShow();
+            ihmWin.add(homes);
+        }
+    }
+
+    private void questionsLMouseClicked(Home homet, HomeS homes) throws SQLException, ClassNotFoundException {
+        if (test)
+            ihmWin.remove(homet);
+        else
+            ihmWin.remove(homes);
+
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,1));
+        test.setBackground(Dracula);
+        String queryL = "select * from question";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        rsl.last();
+        rsl.next();
+        while(rsl.previous())
+        {
+            test.add(new ShowQuestion(rsl));
+        }
+        JPanel cTest = new JPanel(new BorderLayout());
+        cTest.add(test);
+        jp = new JScrollPane(cTest);
+        ihmWin.add(jp, BorderLayout.CENTER);
+        ihmWin.repaint();
     }
 
 }

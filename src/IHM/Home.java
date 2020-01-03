@@ -37,25 +37,9 @@ public class Home extends MyPanel {
     private MyPanel empty5 = new MyPanel(Dracula);
     private MyPanel empty6 = new MyPanel(Dracula);
 
-    private SeeAll lessonsSA = new SeeAll("lesson");
-    private SeeAll importantSA = new SeeAll("news");
-    private SeeAll videosSA = new SeeAll("video");
-
-    private JScrollPane lessonJP = new JScrollPane();
-    private JScrollPane importantJP = new JScrollPane();
-    private JScrollPane videoJP = new JScrollPane();
-
     private ImageIcon addIcon;
 
     public Home(ResultSet rsu) throws SQLException, ClassNotFoundException {
-
-        lessonJP.setViewportView(lessonsSA);
-        importantJP.setViewportView(importantSA);
-        videoJP.setViewportView(videosSA);
-
-        lessonJP.setBackground(Dracula);
-        importantJP.setBackground(Dracula);
-        videoJP.setBackground(Dracula);
 
         //lessonPC
         lessonsPC.setLayout(new GridLayout());
@@ -63,7 +47,9 @@ public class Home extends MyPanel {
         Connection con = dbConnection.getConnection() ;
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
-        for(int i=0; rs.next() && i<4; i++)
+        rs.last();
+        rs.next();
+        for(int i=0; rs.previous() && i<4; i++)
         {
            lessonsPC.add(new dataField(rs,"lesson"));
         }
@@ -82,7 +68,9 @@ public class Home extends MyPanel {
         String queryN = "select * from news";
         PreparedStatement psn = con.prepareStatement(queryN);
         ResultSet rsn = psn.executeQuery();
-        for(int i=0; rsn.next() && i<4; i++)
+        rsn.last();
+        rsn.next();
+        for(int i=0; rsn.previous() && i<4; i++)
         {
             importantPC.add(new dataField(rsn,"news"));
         }
@@ -101,7 +89,9 @@ public class Home extends MyPanel {
         String queryV = "select * from video";
         PreparedStatement psv = con.prepareStatement(queryV);
         ResultSet rsv = psv.executeQuery();
-        for(int i=0; rsv.next() && i<4; i++)
+        rsv.last();
+        rsv.next();
+        for(int i=0; rsv.previous() && i<4; i++)
         {
             videosPC.add(new dataField(rsv,"video"));
         }
@@ -314,7 +304,13 @@ public class Home extends MyPanel {
         lessonsSeeAll.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                lessonsSeeAllMouseClicked();
+                try {
+                    lessonsSeeAllMouseClicked();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -341,7 +337,13 @@ public class Home extends MyPanel {
         importantSeeAll.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                importantSeeAllMouseClicked();
+                try {
+                    importantSeeAllMouseClicked();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -368,7 +370,13 @@ public class Home extends MyPanel {
         videosSeeAll.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                videosSeeAllMouseClicked();
+                try {
+                    videosSeeAllMouseClicked();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
 
             @Override
@@ -452,24 +460,88 @@ public class Home extends MyPanel {
         this.repaint();
     }
 
-    private void videosSeeAllMouseClicked()
-    {
+    private void videosSeeAllMouseClicked() throws SQLException, ClassNotFoundException {
         this.removeAll();
-        this.add(videoJP);
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,4));
+        test.setBackground(Dracula);
+        String queryL = "select * from video";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        rsl.last();
+        rsl.next();
+        while(rsl.previous())
+        {
+            test.add(new dataField(rsl,"video"));
+        }
+        JPanel cTest = new JPanel(new BorderLayout());
+        cTest.add(test);
+        JScrollPane jp = new JScrollPane(cTest);
+        this.add(jp);
         this.repaint();
     }
 
-    private void importantSeeAllMouseClicked()
-    {
+    private void importantSeeAllMouseClicked() throws SQLException, ClassNotFoundException {
         this.removeAll();
-        this.add(importantJP);
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,4));
+        test.setBackground(Dracula);
+        String queryL = "select * from news";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        rsl.last();
+        rsl.next();
+        while(rsl.previous())
+        {
+            test.add(new dataField(rsl,"news"));
+        }
+        JPanel cTest = new JPanel(new BorderLayout());
+        cTest.add(test);
+        JScrollPane jp = new JScrollPane(cTest);
+        this.add(jp);
         this.repaint();
     }
 
-    private void lessonsSeeAllMouseClicked()
-    {
+    private void lessonsSeeAllMouseClicked() throws SQLException, ClassNotFoundException {
+        /*this.removeAll();
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,4));
+        test.setBackground(Dracula);
+        String queryL = "select * from lesson";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        rsl.last();
+        rsl.next();
+        while(rsl.previous())
+        {
+            test.add(new dataField(rsl,"lesson"));
+        }
+        JPanel cTest = new JPanel(new BorderLayout());
+        cTest.add(test);
+        JScrollPane jp = new JScrollPane(cTest);
+        this.add(jp);
+        this.repaint();*/
         this.removeAll();
-        this.add(lessonJP);
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,1));
+        test.setBackground(Dracula);
+        String queryL = "select * from question";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psl = con.prepareStatement(queryL);
+        ResultSet rsl = psl.executeQuery();
+        rsl.last();
+        rsl.next();
+        while(rsl.previous())
+        {
+            test.add(new ShowQuestion(rsl));
+        }
+        JPanel cTest = new JPanel(new BorderLayout());
+        cTest.add(test);
+        JScrollPane jp = new JScrollPane(cTest);
+        this.add(jp);
         this.repaint();
     }
 
