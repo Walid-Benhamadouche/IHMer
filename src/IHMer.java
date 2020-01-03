@@ -20,7 +20,7 @@ class IHMer {
     private Form ihmWin = new Form(screenSize.width, screenSize.height, "IHMer");
 
     private Color Dracula = new Color(45, 52, 54);
-    private Color topBar = new Color(238, 186, 43);
+    private Color topBar = new Color(238, 158, 67);
 
     private Label logoL = new Label();
     private Label sideMenuL = new Label();
@@ -57,13 +57,13 @@ class IHMer {
         //images
         logo = new ImageIcon("IHMer.png");
         logoL.setIcon(logo);
-        sideMenu = new ImageIcon("hum.png");
+        sideMenu = new ImageIcon("menue.png");
         sideMenuL.setIcon(sideMenu);
-        homeI = new ImageIcon("IHMerMini.png");
+        homeI = new ImageIcon("ihmertoolbar.png");
         homeL.setIcon(homeI);
-        questions = new ImageIcon("Qq.png");
+        questions = new ImageIcon("question.png");
         questionsL.setIcon(questions);
-        profile = new ImageIcon("user.png");
+        profile = new ImageIcon("usere.png");
         profileL.setIcon(profile);
 
         //loading screen panel show

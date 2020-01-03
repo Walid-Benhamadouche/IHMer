@@ -22,11 +22,11 @@ public class LogIn {
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
 
-    private Label SignInText = new Label("Times New Roman", Font.PLAIN, 36, Orange, "Sign In");
-    private Label E_mailL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "E-mail");
-    private Label PasswordL = new Label("Tahoma", Font.PLAIN, 14, Color.gray, "Password");
+    private Label SignInText = new Label("Comic Sans MS", Font.PLAIN, 36, Orange, "Sign In");
+    private Label E_mailL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "E-mail");
+    private Label PasswordL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Password");
     private Label logoL = new Label();
-    private Label eXMemberL = new Label("Tahoma", Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
+    private Label eXMemberL = new Label("Comic Sans MS", Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -36,9 +36,10 @@ public class LogIn {
 
     private CheckBox RememberMe = new CheckBox(Dracula, Color.gray, "Remember me");
 
+
     private Button Cancel = new Button(80, 30, Orange, Dracula, "Cancel");
     private Button Sign_in = new Button(80, 30, Orange, Dracula, "Sign in");
-    private Button Sign_up = new Button(85, 18, Orange, Dracula, "Sign up");
+    private Button Sign_up = new Button(85, 22, Orange, Dracula, "Sign up");
 
     private MyPanel topPanel = new MyPanel(720, 80, Dracula);
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
@@ -75,7 +76,7 @@ public class LogIn {
         lgbc.gridy = 1;
         leftPanel.add(eXMemberL, lgbc);
         //Sign_up-----------------------
-        lgbc.gridx = 1;
+        lgbc.gridx = 6;
         lgbc.anchor = GridBagConstraints.FIRST_LINE_START;
         leftPanel.add(Sign_up, lgbc);
 
