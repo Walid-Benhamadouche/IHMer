@@ -45,7 +45,7 @@ public class LogIn {
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
     private MyPanel rightPanel = new MyPanel(360, 310, Dracula);
 
-    private LogIn() {
+    LogIn() {
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
