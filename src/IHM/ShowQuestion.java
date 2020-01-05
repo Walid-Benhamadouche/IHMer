@@ -1,11 +1,13 @@
 package IHM;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.*;
 
 public class ShowQuestion extends MyPanel
 {
-    public ShowQuestion(ResultSet rs) throws SQLException, ClassNotFoundException {
+    public ShowQuestion(ResultSet rs, ResultSet rsu) throws SQLException, ClassNotFoundException {
         Color Dracula = new Color(45, 52, 54);
         Color backColor = new Color(230, 145, 56);
 
@@ -13,7 +15,7 @@ public class ShowQuestion extends MyPanel
 
         this.setLayout(new GridLayout(0,1));
         MyPanel answer = new MyPanel();
-        TextArea postTF = new TextArea(700, 100, new Color(255, 229, 153), new Color(49, 53, 57));
+        TextArea postTF = new TextArea(1200, 50, new Color(255, 229, 153), new Color(49, 53, 57));
 
         String query = "select * from user where `idus` = ?";
         String query2 = "select * from student where `ids` = ?";
@@ -40,14 +42,15 @@ public class ShowQuestion extends MyPanel
         test.setBackground(Dracula);
         String queryL = "select * from respons where `idq` = ?";
         PreparedStatement psl = con.prepareStatement(queryL);
-        psl.setInt(1,rs.getInt("idq"));
+        int idq = rs.getInt("idq");
+        System.out.print(idq);
+        psl.setInt(1,idq);
         ResultSet rsl = psl.executeQuery();
         rsl.last();
         rsl.next();
         while(rsl.previous())
         {
-            System.out.print(String.valueOf(rsl.getString("respons")));
-            test.add(new Label("Tahoma", Font.PLAIN, 14, backColor, rsl.getString("respons")+"hi"));
+            test.add(new Label("Tahoma", Font.PLAIN, 14, backColor, rsl.getString("respons")));
         }
         JPanel cTest = new JPanel(new BorderLayout());
         cTest.add(test);
@@ -55,10 +58,59 @@ public class ShowQuestion extends MyPanel
         this.add(jp);
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        answer.setLayout(new GridLayout(1,2));
+        Button addA = new Button(100, 50, backColor, Dracula, "answer");
+        answer.setLayout(new GridBagLayout());
+        GridBagConstraints gb = new GridBagConstraints();
+        gb.gridx = 0;
+        gb.gridy = 0;
         answer.add(postTF);
-        answer.add(new Button(120, 30, backColor, Dracula, "answer"));
+        gb.gridx = 1;
+        answer.add(addA);
         this.add(answer);
+        addA.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    addAMouseClicked(idq,postTF,rsu);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    public void addAMouseClicked(int idq, TextArea text, ResultSet rsu) throws SQLException, ClassNotFoundException {
+        String queryI = "insert into respons (idus, idq, respons)"+"VALUES (?,?,?)";
+
+        Connection con = dbConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement(queryI, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setInt(1,rsu.getInt("idus"));
+        ps.setInt(2,idq);
+        ps.setString(3,text.getText());
+        ps.execute();
+        text.setText("");
     }
 }

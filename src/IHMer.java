@@ -145,7 +145,7 @@ class IHMer {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    questionsLMouseClicked(homet, homes);
+                    questionsLMouseClicked(homet, homes, rs);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {
@@ -187,7 +187,7 @@ class IHMer {
         }
     }
 
-    private void questionsLMouseClicked(Home homet, HomeS homes) throws SQLException, ClassNotFoundException {
+    private void questionsLMouseClicked(Home homet, HomeS homes, ResultSet rs) throws SQLException, ClassNotFoundException {
         if (test)
             ihmWin.remove(homet);
         else
@@ -204,7 +204,7 @@ class IHMer {
         rsl.next();
         while(rsl.previous())
         {
-            test.add(new ShowQuestion(rsl));
+            test.add(new ShowQuestion(rsl,rs));
         }
         JPanel cTest = new JPanel(new BorderLayout());
         cTest.add(test);

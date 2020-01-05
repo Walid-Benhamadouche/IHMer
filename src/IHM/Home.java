@@ -508,7 +508,7 @@ public class Home extends MyPanel {
     }
 
     private void lessonsSeeAllMouseClicked() throws SQLException, ClassNotFoundException {
-        /*this.removeAll();
+        this.removeAll();
         JPanel test = new JPanel();
         test.setLayout(new GridLayout(0,4));
         test.setBackground(Dracula);
@@ -526,26 +526,8 @@ public class Home extends MyPanel {
         cTest.add(test);
         JScrollPane jp = new JScrollPane(cTest);
         this.add(jp);
-        this.repaint();*/
-        this.removeAll();
-        JPanel test = new JPanel();
-        test.setLayout(new GridLayout(0,1));
-        test.setBackground(Dracula);
-        String queryL = "select * from question";
-        Connection con = dbConnection.getConnection() ;
-        PreparedStatement psl = con.prepareStatement(queryL);
-        ResultSet rsl = psl.executeQuery();
-        rsl.last();
-        rsl.next();
-        while(rsl.previous())
-        {
-            test.add(new ShowQuestion(rsl));
-        }
-        JPanel cTest = new JPanel(new BorderLayout());
-        cTest.add(test);
-        JScrollPane jp = new JScrollPane(cTest);
-        this.add(jp);
         this.repaint();
+
     }
 
 
