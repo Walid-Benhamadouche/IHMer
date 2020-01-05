@@ -16,8 +16,8 @@ public class AboutUs {
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
     private IHM.Label logoL = new IHM.Label();
-    private IHM.Label titleText = new IHM.Label("Comic Sans MS", Font.PLAIN, 21, Orange, "IHMer Blog");
-    private IHM.Label texte = new Label("Comic Sans MS", Font.PLAIN, 17, white,"");
+    private IHM.Label titleText = new IHM.Label("Californian FB", Font.PLAIN, 21, Orange, "IHMer Blog");
+    private IHM.Label texte = new Label("Californian FB", Font.PLAIN, 17, white,"");
     private MyPanel topPanel = new MyPanel(300, 300, Dracula);
     private MyPanel downPanel = new MyPanel(200, 100, Dracula);
     private ImageIcon logo;
@@ -25,6 +25,7 @@ public class AboutUs {
 
 
     public AboutUs() {
+        aboutUs.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {

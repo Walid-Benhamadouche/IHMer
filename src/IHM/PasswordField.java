@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PasswordField extends JPasswordField {
 
-    private Font defaultFont = new Font("Comic Sans MS", Font.BOLD, 12);
+    private Font defaultFont = new Font("Californian FB", Font.BOLD, 12);
     private Dimension defaultDim;
 
     public PasswordField(int x, int y, Color backGround, Color foreGround) {

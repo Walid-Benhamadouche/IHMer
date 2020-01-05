@@ -15,18 +15,18 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Informations {
-    private Form informations = new Form(800, 600, "Sign Up");
+    private Form informations = new Form(800, 600, "Account Informations");
 
     private Image logInIcon;
     private ImageIcon logo;
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
-    private IHM.Label personnelInfoL = new IHM.Label("Comic Sans MS", Font.PLAIN, 18, Orange, "Personnel Informations");
+    private IHM.Label personnelInfoL = new IHM.Label("Californian FB", Font.PLAIN, 20, Orange, "Personnel Informations");
     private IHM.Label logoL = new IHM.Label();
-    private IHM.Label E_mailL = new IHM.Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "E-mail   ");
-    private IHM.Label PasswordL = new IHM.Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Password   ");
-    private IHM.Label userNameL = new IHM.Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "User Name   ");
-    private IHM.Label confirmL = new IHM.Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Confirm   ");
+    private IHM.Label E_mailL = new IHM.Label("Californian FB", Font.PLAIN, 18, Color.gray, "E-mail   ");
+    private IHM.Label PasswordL = new IHM.Label("Californian FB", Font.PLAIN, 18, Color.gray, "Password   ");
+    private IHM.Label userNameL = new IHM.Label("Californian FB", Font.PLAIN, 18, Color.gray, "User Name   ");
+    private IHM.Label confirmL = new IHM.Label("Californian FB", Font.PLAIN, 18, Color.gray, "Confirm   ");
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
     private Separator userNameS = new Separator(240, Color.gray);
@@ -41,24 +41,24 @@ public class Informations {
     private MyPanel botPanel = new MyPanel(800, 60, Dracula);
 
 
-    private Button cancel = new Button(100, 50, Orange, Dracula, "Cancel");
+    //private Button cancel = new Button(100, 50, Orange, Dracula, "Cancel");
     private Button save = new Button(100, 50, Orange, Dracula, "save");
-    private Informations(){
+    private int userId;
 
+    Informations(int userId) {
+        this.userId = userId;
+
+        informations.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         informations.setIconImage(logInIcon);
-        save.setFont(new Font("Comic Sans MS",Font.PLAIN,22));
-        cancel.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
+        save.setFont(new Font("Californian FB", Font.PLAIN, 22));
+        //cancel.setFont(new Font("Californian FB",Font.PLAIN,20));
         informations.setLayout(new BorderLayout());
 
-        //topPanel Configuration
-
-        //topPanel.setLayout(new GridBagLayout());
-        //GridBagConstraints tgbc = new GridBagConstraints();
         informations.setVisible(true);
 //topPanel Configuration
 
@@ -68,7 +68,7 @@ public class Informations {
         tgbc.gridx = 0;
         //logoL-------------------------
         tgbc.gridy = 0;
-        tgbc.weighty= 0.4;
+        tgbc.weighty = 0.4;
         topPanel.add(logoL, tgbc);
         //personal information text----------------------
         tgbc.gridy = 1;
@@ -135,12 +135,12 @@ public class Informations {
         mainPanel.add(confirmS, mainGbc);
 
         //cancel-------------------
-        botGbc.gridx = 1;
+        /*botGbc.gridx = 1;
         botGbc.weightx = 20;
-        botPanel.add(cancel, botGbc);
+        botPanel.add(cancel, botGbc);*/
         //save button--------------
         botGbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        botGbc.gridx = 3;
+        botGbc.gridx = 2;
         botPanel.add(save, botGbc);
 
 
@@ -210,37 +210,11 @@ public class Informations {
         });
 
 
-        cancel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cancelMouseClicked();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                cancelMouseEntered();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                cancelMouseExited();
-            }
-        });
-
         save.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                saveMouseClicked();
 
             }
 
@@ -274,9 +248,6 @@ public class Informations {
 
     }
 
-    public static void main(String[] args) {
-        Informations informations = new Informations();
-    }
 
     private void userNameFFocusGained() {
         userNameF.setForeground(Orange);
@@ -325,87 +296,57 @@ public class Informations {
         confirmL.setForeground(Color.gray);
         confirmS.setForeground(Color.gray);
     }
+
     private void cancelMouseClicked() {
-        System.exit(0);
+        informations.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        //System.exit(0);
     }
 
-    private void cancelMouseEntered() {
-        cancel.setBackground(Color.GRAY);
+    private void saveMouseEntered() {
+        save.setBackground(Color.GRAY);
     }
 
-    private void cancelMouseExited() {
-        cancel.setBackground(Dracula);
-    }
-///////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////
-private void saveMouseEntered() {
-    save.setBackground(Color.GRAY);
-}
-////////////////////////////////////////
-/*private void saveUpMouseClicked() {
-    String userName = userNameF.getText();
-    String eMail = E_mailF.getText();
-    String password = String.valueOf(PasswordF.getPassword());
-    String confirmPassword = String.valueOf(confirmF.getPassword());
-    String profile;
-    int idus = 0;
+    ////////////////////////////////////////
+    private void saveMouseClicked() {
+        String userName = userNameF.getText();
+        String eMail = E_mailF.getText();
+        String password = String.valueOf(PasswordF.getPassword());
+        String confirmPassword = String.valueOf(confirmF.getPassword());
 
-    if(student.isSelected())
-        profile = "student";
-    else
-        profile ="teacher";
 
-    if(userName.equals("")) { JOptionPane.showMessageDialog( null, "Add a user name"); }
-    else if(eMail.equals("")) { JOptionPane.showMessageDialog( null, "add an email"); }
-    else if(password.equals("")) { JOptionPane.showMessageDialog( null, "add a password"); }
-    else if(confirmPassword.equals("")) { JOptionPane.showMessageDialog( null, "please confirm your password"); }
-    else if(!password.equals(confirmPassword)) { JOptionPane.showMessageDialog( null, "password doesn't match confirmation"); }
-
-    String query = "insert into user (email, password, username, profile)"+"VALUES (?,?,?,?)";
-    String query1 = "insert into "+profile+" (idus)"+"VALUES (?)";
-    String query2 = "select email, password from user where `email` = ? and `password`=?";
-    try
-    {
-        //Class.forName("com.mysql.cj.jdbc.Driver");
-        // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
-        Connection con = dbConnection.getConnection() ;
-        PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        PreparedStatement ps1 = con.prepareStatement(query1);
-
-        ps.setString(1,eMail);
-        ps.setString(2,password);
-        ps.setString(3,userName);
-        ps.setString(4,profile);
-        ps.execute();
-        ResultSet res = ps.getGeneratedKeys();
-        while (res.next())
-        {
-            idus = res.getInt(1);
+        if (userName.equals("")) {
+            JOptionPane.showMessageDialog(null, "Set a user name");
+        } else if (eMail.equals("")) {
+            JOptionPane.showMessageDialog(null, "Set an email");
+        } else if (password.equals("")) {
+            JOptionPane.showMessageDialog(null, "Set a password");
+        } else if (confirmPassword.equals("")) {
+            JOptionPane.showMessageDialog(null, "please confirm your password");
+        } else if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "password doesn't match confirmation");
         }
-        System.out.print(idus);
-        ps1.setInt(1,idus);
-        ps1.execute();
-        //hadi kima ta3 log in copy past
-        PreparedStatement ps2 = con.prepareStatement(query2);
-        ps2.setString(1, eMail);
-        ps2.setString(2, password);
-        ResultSet rs = ps2.executeQuery();
 
-        rs.next();
+        //String query = "update user where idus = '" + userId + "' Set email ='" + eMail + "' Set password = '" + password + "' Set username = '" + userName + "';";
+        String query = "update user Set email = '" + eMail + "' , password = '" + password + "' , username = '" + userName + "' where idus = '" + userId + "';";
 
-        IHMer ihmer = new IHMer(rs);
-        signUp.dispose();
+        System.out.println(query);
+        try {
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            // Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihmer?autoReconnect=true&useSSL=false","root","dragonhead1234");
+            Connection con = dbConnection.getConnection();
+            Statement sttm = con.createStatement();
+            sttm.executeUpdate(query);
+            informations.dispose();
 
-    }catch(SQLException | ClassNotFoundException ex)
-    {
-        JOptionPane.showMessageDialog( null, "error");
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "error");
+        }
+
     }
 
-}*/
-///////////////////////////////
-    /////////////////////////////////////
-private void saveMouseExited() {
-    save.setBackground(Dracula);
-}
+    private void saveMouseExited() {
+        save.setBackground(Dracula);
+    }
 }

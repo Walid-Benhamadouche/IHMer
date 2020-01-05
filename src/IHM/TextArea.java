@@ -11,7 +11,7 @@ class TextArea extends JTextArea
         defaultDim = new Dimension(x, y);
         this.setBackground(backGround);
         this.setForeground(foreGround);
-        Font defaultFont = new Font("Comic Sans MS", Font.BOLD, 12);
+        Font defaultFont = new Font("Californian FB", Font.BOLD, 12);
         this.setFont(defaultFont);
         this.setLineWrap(true);
         this.setWrapStyleWord(true);

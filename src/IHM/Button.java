@@ -10,7 +10,7 @@ public class Button extends JButton {
 
     public Button(int x, int y, Color foreGround, Color backGround, String name)
     {
-        Font defaultFont = new Font("Comic Sans MS", Font.BOLD, 12);
+        Font defaultFont = new Font("Californian FB", Font.BOLD, 15);
         Dimension defaultDim = new Dimension(x, y);
         this.setText(name);
         this.setBackground(backGround);

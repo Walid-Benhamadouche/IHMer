@@ -12,12 +12,12 @@ public class HomeS extends MyPanel
     private Color Dracula = new Color(45, 52, 54);
     private Color backColor = new Color(230, 145, 56);
 
-    private Label lessonsL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
-    private Label importantL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Important");
-    private Label importantSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
-    private Label videosL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Videos");
-    private Label videosSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
+    private Label lessonsL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Lessons");
+    private Label lessonsSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
+    private Label importantL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Important");
+    private Label importantSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
+    private Label videosL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Videos");
+    private Label videosSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
 
     private MyPanel lessonsP = new MyPanel(Dracula);
     private MyPanel lessonsPC = new MyPanel(Dracula);

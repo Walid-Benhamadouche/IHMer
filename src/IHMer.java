@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 class IHMer {
+    private final int userId;
     //declaration
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -30,6 +31,8 @@ class IHMer {
 
     private MyPanel loadingScreen = new MyPanel(Dracula);
     private MyPanel topMenuBar = new MyPanel(screenSize.width, 50, topBar);
+    SideMenuBare  sideMenuBare = new SideMenuBare();
+
 
     private Image logInIcon;
     private ImageIcon logo;
@@ -41,14 +44,16 @@ class IHMer {
     private JScrollPane jp;
 
     private boolean test;
+    private boolean isSideMenuOpen=false;
 
-    IHMer(ResultSet rs) throws SQLException, ClassNotFoundException {
+    IHMer(ResultSet rs) throws SQLException, ClassNotFoundException { this.userId=rs.getInt("idus");
 
         try {
             logInIcon = ImageIO.read(new File("IHMerMini.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ihmWin.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ihmWin.setIconImage(logInIcon);
         ihmWin.setLayout(new BorderLayout());
         //to test profile passage
@@ -140,6 +145,59 @@ class IHMer {
 
             }
         });
+        profileL.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                goToProfile();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        sideMenuL.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               if(!isSideMenuOpen) showSideMenuBar();
+                else hideSideMenuBar();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         questionsL.addMouseListener(new MouseListener() {
             @Override
@@ -174,6 +232,23 @@ class IHMer {
             }
         });
 
+    }
+
+    private void showSideMenuBar() {
+        ihmWin.getContentPane().add(sideMenuBare, BorderLayout.WEST);
+        ihmWin.getContentPane().revalidate();
+        ihmWin.getContentPane().repaint();
+        isSideMenuOpen=true;
+    }
+    private void hideSideMenuBar(){
+        ihmWin.getContentPane().remove(sideMenuBare);
+        ihmWin.getContentPane().revalidate();
+        ihmWin.getContentPane().repaint();
+        isSideMenuOpen=false;
+    }
+
+    private void goToProfile() {
+        Informations info = new Informations(userId);
     }
 
     private void homeLMouseClicked(Home homet,HomeS homes) {

@@ -22,14 +22,14 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
 
-    private Label joinUsText = new Label("Comic Sans MS", Font.PLAIN, 25, Orange, "   Join us");
+    private Label joinUsText = new Label("Californian FB", Font.PLAIN, 25, Orange, "   Join us");
     private Label logoL = new Label();
-    private Label E_mailL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "E-mail   ");
-    private Label PasswordL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Password   ");
-    private Label userNameL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "User Name   ");
-    private Label confirmL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Confirm   ");
-    private Label userProfileL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "User Profile   ");
-    private Label alreadyMember = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "       Already a member ?");
+    private Label E_mailL = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "E-mail   ");
+    private Label PasswordL = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "Password   ");
+    private Label userNameL = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "User Name   ");
+    private Label confirmL = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "Confirm   ");
+    private Label userProfileL = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "User Profile   ");
+    private Label alreadyMember = new Label("Californian FB", Font.PLAIN, 16, Color.gray, "       Already a member ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -284,6 +284,32 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
                 cancelMouseExited();
             }
         });
+        sign_In.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SignInMouseClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         sign_Up.addMouseListener(new MouseListener() {
             @Override
@@ -484,5 +510,10 @@ public class SignUp { //i added botPanel for hadok l buttons li lta7t
     private void studentActionPerformed() {
         student.setSelected(true);
         teacher.setSelected(false);
+    }
+    private void SignInMouseClicked()
+    {
+        LogIn log = new LogIn();
+        signUp.dispose();
     }
 }

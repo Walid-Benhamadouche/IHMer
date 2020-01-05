@@ -22,11 +22,11 @@ public class LogIn {
     private Color Dracula = new Color(45, 52, 54);
     private Color Orange = new Color(230, 145, 56);
 
-    private Label SignInText = new Label("Comic Sans MS", Font.PLAIN, 36, Orange, "Sign In");
-    private Label E_mailL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "E-mail");
-    private Label PasswordL = new Label("Comic Sans MS", Font.PLAIN, 14, Color.gray, "Password");
+    private Label SignInText = new Label("Californian FB", Font.PLAIN, 36, Orange, "Sign In");
+    private Label E_mailL = new Label("Californian FB", Font.BOLD, 16, Color.gray, "E-mail");
+    private Label PasswordL = new Label("Californian FB", Font.BOLD, 16, Color.gray, "Password");
     private Label logoL = new Label();
-    private Label eXMemberL = new Label("Comic Sans MS", Font.PLAIN, 12, Color.lightGray, "New to IHMer ?");
+    private Label eXMemberL = new Label("Californian FB", Font.BOLD, 19, Color.lightGray, "New to IHMer ?");
 
     private Separator E_mailS = new Separator(240, Color.gray);
     private Separator PasswordS = new Separator(240, Color.gray);
@@ -39,7 +39,7 @@ public class LogIn {
 
     private Button Cancel = new Button(80, 30, Orange, Dracula, "Cancel");
     private Button Sign_in = new Button(80, 30, Orange, Dracula, "Sign in");
-    private Button Sign_up = new Button(85, 22, Orange, Dracula, "Sign up");
+    private Button Sign_up = new Button(90, 30, Orange, Dracula, "Sign up");
 
     private MyPanel topPanel = new MyPanel(720, 80, Dracula);
     private MyPanel leftPanel = new MyPanel(360, 310, Dracula);
@@ -270,8 +270,7 @@ public class LogIn {
         Sign_in.setBackground(Dracula);
     }
 
-    private void signInMouseClicked()
-    {
+    private void signInMouseClicked() {
         try {
             String email = E_mailF.getText();
             String password = String.valueOf(PasswordF.getPassword());
@@ -289,10 +288,9 @@ public class LogIn {
 
             IHMer ihmer = new IHMer(rs);
             logIn.dispose();
-            }catch (SQLException | ClassNotFoundException e)
-                    {
-                        JOptionPane.showMessageDialog( null, e.getMessage());
-                    }
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     private void e_mailFFocusGained() {
@@ -327,9 +325,8 @@ public class LogIn {
         RememberMe.setForeground(Color.gray);
     }
 
-    private void SignUnMouseClicked()
-    {
-        SignUp signUp= new SignUp();
+    private void SignUnMouseClicked() {
+        SignUp signUp = new SignUp();
         logIn.dispose();
     }
 

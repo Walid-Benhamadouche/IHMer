@@ -33,7 +33,7 @@ public class ShowQuestion extends MyPanel
 
         String wth = "<html>question by "+rs1.getString("username")+"<br>"+rs.getString("question")+"</html>";
 
-        Label question = new Label("Tahoma", Font.PLAIN, 14, backColor,wth/*"             hi     "+rs1.getString("username")+"\n"+rs.getString("question")*/);
+        Label question = new Label("Californian FB", Font.PLAIN, 14, backColor,wth/*"             hi     "+rs1.getString("username")+"\n"+rs.getString("question")*/);
         this.add(question);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ public class ShowQuestion extends MyPanel
         rsl.next();
         while(rsl.previous())
         {
-            test.add(new Label("Tahoma", Font.PLAIN, 14, backColor, rsl.getString("respons")));
+            test.add(new Label("Californian FB", Font.PLAIN, 14, backColor, rsl.getString("respons")));
         }
         JPanel cTest = new JPanel(new BorderLayout());
         cTest.add(test);
