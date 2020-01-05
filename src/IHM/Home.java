@@ -1,5 +1,6 @@
 package IHM;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,11 +14,11 @@ public class Home extends MyPanel {
     private Color Dracula = new Color(45, 52, 54);
     private Color backColor = new Color(230, 145, 56);
 
-    private Label lessonsL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All        ");
-    private Label importantL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Important");
-    private Label importantSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All          ");
-    private Label videosL = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "Videos");
+    private Label lessonsL = new Label("Comic Sans MS", Font.BOLD, 20, backColor, "Lessons");
+    private Label lessonsSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All           ");
+    private Label importantL = new Label("Comic Sans MS", Font.BOLD, 20, backColor, "Important");
+    private Label importantSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All           ");
+    private Label videosL = new Label("Comic Sans MS", Font.BOLD, 20, backColor, "Videos");
     private Label videosSeeAll = new Label("Comic Sans MS", Font.BOLD, 14, backColor, "See All           ");
     private Label addLesson = new Label();
     private Label addNews = new Label();
@@ -49,7 +50,7 @@ public class Home extends MyPanel {
         ResultSet rs = ps.executeQuery();
         rs.last();
         rs.next();
-        for(int i=0; rs.previous() && i<4; i++)
+        for(int i=0; rs.previous() && i<7; i++)
         {
            lessonsPC.add(new dataField(rs,"lesson"));
         }
@@ -71,7 +72,7 @@ public class Home extends MyPanel {
         ResultSet rsn = psn.executeQuery();
         rsn.last();
         rsn.next();
-        for(int i=0; rsn.previous() && i<4; i++)
+        for(int i=0; rsn.previous() && i<7; i++)
         {
             importantPC.add(new dataField(rsn,"news"));
         }
@@ -93,7 +94,7 @@ public class Home extends MyPanel {
         ResultSet rsv = psv.executeQuery();
         rsv.last();
         rsv.next();
-        for(int i=0; rsv.previous() && i<4; i++)
+        for(int i=0; rsv.previous() && i<7; i++)
         {
             videosPC.add(new dataField(rsv,"video"));
         }
@@ -107,6 +108,11 @@ public class Home extends MyPanel {
         addVideo.setHorizontalTextPosition(JLabel.CENTER);
         addVideo.setVerticalTextPosition(JLabel.BOTTOM);
         videosPC.add(addVideo);
+
+        lessonsPC.setBorder(new LineBorder(Color.gray));
+        importantPC.setBorder(new LineBorder(Color.gray));
+        videosPC.setBorder(new LineBorder(Color.gray));
+
 
         //lessonsP
         empty1.setPreferredSize(new Dimension(10,20));
@@ -406,14 +412,78 @@ public class Home extends MyPanel {
 
     private void addLessonMouseClicked(ResultSet rsu) throws SQLException, ClassNotFoundException, FileNotFoundException {
         this.add(rsu,"lesson");
+        lessonsPC.removeAll();
+        String query = "select * from lesson";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        rs.last();
+        rs.next();
+        for(int i=0; rs.previous() && i<7; i++)
+        {
+            lessonsPC.add(new dataField(rs,"lesson"));
+        }
+        addIcon = new ImageIcon("icons8-add-file-400.png");
+        addLesson.setIcon(addIcon);
+        addLesson.setText("Add a lesson");
+        addLesson.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
+        addLesson.setForeground(backColor);
+        addLesson.setHorizontalTextPosition(JLabel.CENTER);
+        addLesson.setVerticalTextPosition(JLabel.BOTTOM);
+        lessonsPC.add(addLesson);
+        this.repaint();
     }
 
     private void addNewsMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
         this.add(rsu,"news");
+        importantPC.removeAll();
+        String queryN = "select * from news";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psn = con.prepareStatement(queryN);
+        ResultSet rsn = psn.executeQuery();
+        rsn.last();
+        rsn.next();
+        for(int i=0; rsn.previous() && i<7; i++)
+        {
+            importantPC.add(new dataField(rsn,"news"));
+        }
+
+        //add a news function
+        addIcon = new ImageIcon("icons8-add-image-100.png");
+        addNews.setIcon(addIcon);
+        addNews.setText("Add news");
+        addNews.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
+        addNews.setForeground(backColor);
+        addNews.setHorizontalTextPosition(JLabel.CENTER);
+        addNews.setVerticalTextPosition(JLabel.BOTTOM);
+        importantPC.add(addNews);
+        this.repaint();
     }
 
     private void addVideoMouseClicked(ResultSet rsu) throws FileNotFoundException, SQLException, ClassNotFoundException {
         this.add(rsu,"video");
+        videosPC.removeAll();
+        String queryV = "select * from video";
+        Connection con = dbConnection.getConnection() ;
+        PreparedStatement psv = con.prepareStatement(queryV);
+        ResultSet rsv = psv.executeQuery();
+        rsv.last();
+        rsv.next();
+        for(int i=0; rsv.previous() && i<7; i++)
+        {
+            videosPC.add(new dataField(rsv,"video"));
+        }
+
+        //add a video function
+        //addIcon = new ImageIcon("IHMer.png");
+        addVideo.setIcon(addIcon);
+        addVideo.setText("Add video");
+        addVideo.setFont(new Font("Comic Sans MS",Font.PLAIN,14));
+        addVideo.setForeground(backColor);
+        addVideo.setHorizontalTextPosition(JLabel.CENTER);
+        addVideo.setVerticalTextPosition(JLabel.BOTTOM);
+        videosPC.add(addVideo);
+        this.repaint();
     }
 
     private void add(ResultSet rsu,String type) throws FileNotFoundException, SQLException, ClassNotFoundException {
@@ -461,6 +531,7 @@ public class Home extends MyPanel {
         ps1.setString(3, file.getName());
         ps1.execute();
         this.repaint();
+
     }
 
     private void videosSeeAllMouseClicked() throws SQLException, ClassNotFoundException {
@@ -537,7 +608,7 @@ public class Home extends MyPanel {
         this.add(lessonsP);
         this.add(importantP);
         this.add(videosP);
-        this.add(quoteP);
+        //this.add(quoteP);
         this.repaint();
     }
 
