@@ -28,6 +28,10 @@ class dataField extends Label{
                 lesson = new ImageIcon("icons8-edit-file-400.png");
                 break;
         }
+        Dimension d= new Dimension(150,140);
+        this.setMinimumSize(d);
+        this.setPreferredSize(d);
+        this.setMaximumSize(d);
         this.setIcon(lesson);
         this.setText(rs.getString("name"));
         this.setForeground(backColor);

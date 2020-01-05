@@ -1,5 +1,6 @@
 package IHM;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,11 +12,11 @@ public class HomeS extends MyPanel
     private Color Dracula = new Color(45, 52, 54);
     private Color backColor = new Color(230, 145, 56);
 
-    private Label lessonsL = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "Lessons");
+    private Label lessonsL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Lessons");
     private Label lessonsSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
-    private Label importantL = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "Important");
-    private Label importantSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All          ");
-    private Label videosL = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "Videos");
+    private Label importantL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Important");
+    private Label importantSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
+    private Label videosL = new Label("Comic Sans MS", Font.PLAIN, 20, backColor, "Videos");
     private Label videosSeeAll = new Label("Comic Sans MS", Font.PLAIN, 14, backColor, "See All           ");
 
     private MyPanel lessonsP = new MyPanel(Dracula);
@@ -51,7 +52,7 @@ public class HomeS extends MyPanel
         ResultSet rsl = psl.executeQuery();
         rsl.last();
         rsl.next();
-        for(int i=0; rsl.previous() && i<4; i++)
+        for(int i=0; rsl.previous() && i<8; i++)
         {
             lessonsPC.add(new dataField(rsl,"lesson"));
         }
@@ -63,7 +64,7 @@ public class HomeS extends MyPanel
         ResultSet rsn = psn.executeQuery();
         rsn.last();
         rsn.next();
-        for(int i=0; rsn.previous() && i<4; i++)
+        for(int i=0; rsn.previous() && i<8; i++)
         {
             importantPC.add(new dataField(rsn,"news"));
         }
@@ -75,10 +76,14 @@ public class HomeS extends MyPanel
         ResultSet rsv = psv.executeQuery();
         rsv.last();
         rsv.next();
-        for(int i=0; rsv.previous() && i<4; i++)
+        for(int i=0; rsv.previous() && i<8; i++)
         {
             videosPC.add(new dataField(rsv,"video"));
         }
+
+        lessonsPC.setBorder(new LineBorder(Color.gray));
+        importantPC.setBorder(new LineBorder(Color.gray));
+        videosPC.setBorder(new LineBorder(Color.gray));
 
         //lessonsP
         empty1.setPreferredSize(new Dimension(10,20));
