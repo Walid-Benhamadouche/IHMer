@@ -13,11 +13,11 @@ public class HomeS extends MyPanel
     private Color backColor = new Color(230, 145, 56);
 
     private Label lessonsL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Lessons");
-    private Label lessonsSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
+    private Label lessonsSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All            ");
     private Label importantL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Important");
     private Label importantSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
     private Label videosL = new Label("Californian FB", Font.PLAIN, 20, backColor, "Videos");
-    private Label videosSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All           ");
+    private Label videosSeeAll = new Label("Californian FB", Font.PLAIN, 14, backColor, "See All            ");
 
     private MyPanel lessonsP = new MyPanel(Dracula);
     private MyPanel lessonsPC = new MyPanel(Dracula);
@@ -36,10 +36,10 @@ public class HomeS extends MyPanel
 
     private TextArea postTF = new TextArea(700, 100, new Color(255, 229, 153), new Color(49, 53, 57));
 
-    private Button postB = new Button(120, 30, backColor, Dracula, "Post question");
+    private Button postB = new Button(200, 40, backColor, Dracula, "Post question");
 
     public HomeS(ResultSet rsu) throws SQLException, ClassNotFoundException {
-
+        postB.setFont(new Font("Californian FB", Font.BOLD, 18));
         //postP
         postP.add(postTF);
         postP.add(postB);

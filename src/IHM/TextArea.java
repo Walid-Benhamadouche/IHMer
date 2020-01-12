@@ -3,15 +3,15 @@ package IHM;
 import javax.swing.*;
 import java.awt.*;
 
-class TextArea extends JTextArea
+public class TextArea extends JTextArea
 {
-    TextArea(int x, int y, Color backGround, Color foreGround)
+    public TextArea(int x, int y, Color backGround, Color foreGround)
     {
         Dimension defaultDim;
         defaultDim = new Dimension(x, y);
         this.setBackground(backGround);
         this.setForeground(foreGround);
-        Font defaultFont = new Font("Californian FB", Font.BOLD, 12);
+        Font defaultFont = new Font("Consolas", Font.BOLD, 20);
         this.setFont(defaultFont);
         this.setLineWrap(true);
         this.setWrapStyleWord(true);

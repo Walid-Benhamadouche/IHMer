@@ -431,6 +431,7 @@ public class Home extends MyPanel {
         addLesson.setHorizontalTextPosition(JLabel.CENTER);
         addLesson.setVerticalTextPosition(JLabel.BOTTOM);
         lessonsPC.add(addLesson);
+        this.revalidate();
         this.repaint();
     }
 
@@ -457,6 +458,7 @@ public class Home extends MyPanel {
         addNews.setHorizontalTextPosition(JLabel.CENTER);
         addNews.setVerticalTextPosition(JLabel.BOTTOM);
         importantPC.add(addNews);
+        this.revalidate();
         this.repaint();
     }
 
@@ -483,6 +485,7 @@ public class Home extends MyPanel {
         addVideo.setHorizontalTextPosition(JLabel.CENTER);
         addVideo.setVerticalTextPosition(JLabel.BOTTOM);
         videosPC.add(addVideo);
+        this.revalidate();
         this.repaint();
     }
 
@@ -504,7 +507,7 @@ public class Home extends MyPanel {
 
         File file = new File(l.getText());
         FileInputStream input = new FileInputStream(file);
-        JOptionPane.showMessageDialog( null, l.getText());
+     //   JOptionPane.showMessageDialog( null, l.getText());
 
         String queryS = "SELECT idt FROM teacher WHERE idus = ?";
         String queryI = "insert into "+type+" (idt, "+type+", name)"+"VALUES (?,?,?)";
@@ -514,22 +517,23 @@ public class Home extends MyPanel {
         Connection con = dbConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(queryS, Statement.RETURN_GENERATED_KEYS);
         ps.setInt(1, rsu.getInt("idus"));
-        JOptionPane.showMessageDialog( null, "connection established and statement created");
+       // JOptionPane.showMessageDialog( null, "connection established and statement created");
 
 
-        JOptionPane.showMessageDialog( null, "statement ready");
+       // JOptionPane.showMessageDialog( null, "statement ready");
         System.out.print(ps);
         ResultSet rsS= ps.executeQuery();
         rsS.next();
-        JOptionPane.showMessageDialog( null, "executed");
+       // JOptionPane.showMessageDialog( null, "executed");
 
         PreparedStatement ps1 = con.prepareStatement(queryI);
 
-        JOptionPane.showMessageDialog( null, rsS.getInt("idt"));
+       // JOptionPane.showMessageDialog( null, rsS.getInt("idt"));
         ps1.setInt(1, rsS.getInt("idt"));
         ps1.setBlob(2, input);
         ps1.setString(3, file.getName());
         ps1.execute();
+        this.revalidate();
         this.repaint();
 
     }
@@ -553,6 +557,7 @@ public class Home extends MyPanel {
         cTest.add(test);
         JScrollPane jp = new JScrollPane(cTest);
         this.add(jp);
+        this.revalidate();
         this.repaint();
     }
 
@@ -575,6 +580,7 @@ public class Home extends MyPanel {
         cTest.add(test);
         JScrollPane jp = new JScrollPane(cTest);
         this.add(jp);
+        this.revalidate();
         this.repaint();
     }
 
@@ -597,6 +603,7 @@ public class Home extends MyPanel {
         cTest.add(test);
         JScrollPane jp = new JScrollPane(cTest);
         this.add(jp);
+        this.revalidate();
         this.repaint();
 
     }
@@ -609,6 +616,7 @@ public class Home extends MyPanel {
         this.add(importantP);
         this.add(videosP);
         //this.add(quoteP);
+        this.revalidate();
         this.repaint();
     }
 

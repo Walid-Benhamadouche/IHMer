@@ -31,7 +31,7 @@ private  JPanel languagePanel = new JPanel();
     JButton frensh = new JButton("Français", frc);
     private boolean languageOpen = false;
 
-    public SideMenuBare() {
+    public SideMenuBare(Form win) {
         super(whiteOrange);
         fontPage.setFont(new Font("Californian FB", Font.BOLD, 25));
         fontPage.setHorizontalTextPosition(SwingConstants.LEADING);
@@ -104,6 +104,8 @@ private  JPanel languagePanel = new JPanel();
         fontPage.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //  frontPageMouselicked();
+
 
             }
 
@@ -178,6 +180,7 @@ private  JPanel languagePanel = new JPanel();
         contacts.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                Contats contact=new Contats();
             }
 
             @Override
@@ -225,7 +228,7 @@ private  JPanel languagePanel = new JPanel();
         logOut.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                logOutMouseClicked();
+                logOutMouseClicked(win);
             }
 
             @Override
@@ -317,6 +320,18 @@ private  JPanel languagePanel = new JPanel();
         languagePanel.repaint();
         languageOpen = true;
     }
+    /*private void frontPageMouselicked(Home homet,HomeS homes,form win) {
+        win.remove(jp);
+        if (test) {
+            homet.reShow();
+            ihmWin.add(homet);
+        } else {
+            homes.reShow();
+            ihmWin.add(homes);
+        }
+        ihmWin.revalidate();
+        ihmWin.repaint();
+    }*/
     private void fontPageMouseEntered() {
         fontPage.setBackground(Orange);
     }
@@ -365,10 +380,11 @@ private  JPanel languagePanel = new JPanel();
         logOut.setBackground(whiteOrange);
     }
 
-    private void logOutMouseClicked() {
+    private void logOutMouseClicked(Form win) {
         LogIn log = new LogIn();
-        // this.dispose(); hna kanat red dunno why
+        win.dispose();
     }
+
 
     private void aboutUsMouseClicked() {
         AboutUs about = new AboutUs();
@@ -392,9 +408,9 @@ private  JPanel languagePanel = new JPanel();
 
 
 
-    public static void main(String[] args) {
-        SideMenuBare side = new SideMenuBare();
-    }
+//    public static void main(String[] args) {
+   //     SideMenuBare side = new SideMenuBare();
+ //   }
 
 }
 

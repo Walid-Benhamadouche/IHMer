@@ -61,9 +61,6 @@ public class AboutUs {
         aboutUs.setIconImage(logInIcon);
         aboutUs.setLayout(new BorderLayout());
 
-        logo = new ImageIcon("IHMer.png");
-        logoL.setIcon(logo);
-        aboutUs.setIconImage(logInIcon);
         aboutUs.getContentPane().add(topPanel, BorderLayout.NORTH);
         aboutUs.getContentPane().add(downPanel, BorderLayout.SOUTH);
         aboutUs.setResizable(false);

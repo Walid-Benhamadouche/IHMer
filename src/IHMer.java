@@ -18,11 +18,11 @@ class IHMer {
     //declaration
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
+
     private Form ihmWin = new Form(screenSize.width, screenSize.height, "IHMer");
 
     private Color Dracula = new Color(45, 52, 54);
     private Color topBar = new Color(238, 158, 67);
-
     private Label logoL = new Label();
     private Label sideMenuL = new Label();
     private Label homeL = new Label();
@@ -31,7 +31,7 @@ class IHMer {
 
     private MyPanel loadingScreen = new MyPanel(Dracula);
     private MyPanel topMenuBar = new MyPanel(screenSize.width, 50, topBar);
-    SideMenuBare  sideMenuBare = new SideMenuBare();
+    SideMenuBare  sideMenuBare = new SideMenuBare(ihmWin);
 
 
     private Image logInIcon;
@@ -260,9 +260,14 @@ class IHMer {
             homes.reShow();
             ihmWin.add(homes);
         }
+        System.out.println("hshddh");
+        //ihmWin.revalidate();
+        ihmWin.repaint();
     }
 
     private void questionsLMouseClicked(Home homet, HomeS homes, ResultSet rs) throws SQLException, ClassNotFoundException {
+        if(jp != null)
+            ihmWin.remove(jp);
         if (test)
             ihmWin.remove(homet);
         else
@@ -271,20 +276,11 @@ class IHMer {
         JPanel test = new JPanel();
         test.setLayout(new GridLayout(0,1));
         test.setBackground(Dracula);
-        String queryL = "select * from question";
-        Connection con = dbConnection.getConnection() ;
-        PreparedStatement psl = con.prepareStatement(queryL);
-        ResultSet rsl = psl.executeQuery();
-        rsl.last();
-        rsl.next();
-        while(rsl.previous())
-        {
-            test.add(new ShowQuestion(rsl,rs));
-        }
         JPanel cTest = new JPanel(new BorderLayout());
-        cTest.add(test);
+        cTest.add(new QuestionPanel(rs));
         jp = new JScrollPane(cTest);
-        ihmWin.add(jp, BorderLayout.CENTER);
+        ihmWin.add(jp);
+        ihmWin.revalidate();
         ihmWin.repaint();
     }
 
